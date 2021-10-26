@@ -2,9 +2,15 @@ from rdkit import Chem
 from rdkit.Chem import AllChem
 import pandas as pd
 import numpy as np
+import sys
+import os
 
-df = pd.read_csv('./merger/merge.csv')
-smiles = df['Canonical SMILES'].values.copy()
+if sys.stdin.isatty():
+    df = pd.read_csv(sys.stdin)
+else:
+    df = pd.read_csv('./merger/merge.csv')
+
+smiles = df['Smiles'].values.copy()
 
 for idx, smile in enumerate(smiles):
     smiles[idx] = Chem.MolFromSmiles(smile)
@@ -17,6 +23,7 @@ count_valence = [sum([x.GetExplicitValence() for x in y.GetAtoms()]) for y in sm
 gesteiger_charges = [[float(x.GetProp("_GasteigerCharge")) for x in y.GetAtoms()] for y in smiles]
 positive_gesteiger_sum = [np.sum([y for y in x if y >= 0]) for x in gesteiger_charges]
 negative_gesteiger_sum = [np.sum([y for y in x if y < 0]) for x in gesteiger_charges]
+hydrogen_count = [sum([x.GetExplicitValence() for x in y.GetAtoms()]) for y in smiles]
 
 df['cycles'] = cycles
 df['atom_valence'] = count_valence
@@ -37,3 +44,6 @@ for binstr in binarystr:
 df['cycle_type_counts'] = converted
 
 df.to_csv('./chem/new_attrib.csv', index=False)
+
+if not os.name == 'nt':
+    df.to_csv(sys.stdout, index=False)
