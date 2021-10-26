@@ -23,12 +23,13 @@ count_valence = [sum([x.GetExplicitValence() for x in y.GetAtoms()]) for y in sm
 gesteiger_charges = [[float(x.GetProp("_GasteigerCharge")) for x in y.GetAtoms()] for y in smiles]
 positive_gesteiger_sum = [np.sum([y for y in x if y >= 0]) for x in gesteiger_charges]
 negative_gesteiger_sum = [np.sum([y for y in x if y < 0]) for x in gesteiger_charges]
-hydrogen_count = [sum([x.GetExplicitValence() for x in y.GetAtoms()]) for y in smiles]
+hydrogen_count = [sum([x.GetAtomicNum() for x in y.GetAtoms() if x.GetAtomicNum() == 1]) for y in smiles]
 
 df['cycles'] = cycles
 df['atom_valence'] = count_valence
 df['negative_gesteiger'] = negative_gesteiger_sum
 df['positive_gesteiger'] = positive_gesteiger_sum
+df['hydrogen_count'] = hydrogen_count
 
 rings = [x.GetRingInfo().BondRings() for x in smiles]
 binarystr = ['0000000000000000'] * len(rings)
