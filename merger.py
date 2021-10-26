@@ -1,19 +1,16 @@
 import pandas as pd
-import numpy as np
 
-with open('./data/columns.dat', 'r') as columnfile:
-    pubchem_columns = columnfile.readline().strip().split(',')
-    swiss_columns = columnfile.readline().strip().split(',')
+with open('./data/new_pubchem.csv', 'r') as pubfile, open('./data/new_pubchem_clean.csv', 'w') as cleanpubfile:
+    lines = pubfile.readlines()
+    
+    for line in lines:
+        new_line = ''.join(letter for letter in line if ord(letter) in range(127))
+        cleanpubfile.writelines(new_line)
 
-df_merge = pd.read_csv('./data/merged.csv')
+
 df_swiss = pd.read_csv('./data/new_swiss.csv')
-df_pubchem = pd.read_csv('./data/new_pubchem.csv', index_col=0)
-
-df_swiss = df_swiss[swiss_columns]
-df_pubchem = df_pubchem[pubchem_columns]
+df_pubchem = pd.read_csv('./data/new_pubchem_clean.csv', index_col=0)
 
 df_concat = pd.concat([df_swiss, df_pubchem], axis=1)
 
-df_merge = pd.concat([df_merge, df_concat], axis=0)
-
-df_merge.to_csv('./data/new_merged.csv', index=False)
+df_concat.to_csv('./merger/merge.csv', index=False, header=True)
