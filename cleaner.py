@@ -1,34 +1,20 @@
+from unittest.mock import inplace
+
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import os.path
-import pysmiles
-# import rdkit
-# from rdkit import Chem
 
 import logging
+import networkx as nx
 
 logging.basicConfig()
 logging.getLogger().setLevel(logging.INFO)
 
 
-# todo add Kuba phototox
-# todo rdkit
-# todo distribuce
-
-# distribuce pro promenne, outliners,
 # poands discribe
-# boxploty
 # by model analysis vuci phototox
-
-# #%%
-# all_csv = ["kuba.csv", "pubchem_extract_1.csv", "swiss_2.csv", "tibor.csv", "pubchem_extract_new.csv", "swiss_1.csv",
-#            "targets.csv"]
-#
-# all_df = [pd.read_csv(f"data/{csv}") for csv in all_csv]
-# for csv, df in zip(all_csv, all_df):
-#     print(len(df.columns), len(df), csv)
 
 # *********  Other ********************************************************
 
@@ -124,9 +110,6 @@ def log_unique_ds_count(left, right, on='Name'):
 
 
 def check_column_consistency(df, mapper: dict, percent_error=None):
-
-
-
     for col1, col2 in mapper.items():
         if percent_error is None:
             is_equal = df[col1] != df[col2]
@@ -166,14 +149,6 @@ def merge_pubchem_swiss(pubchem, swiss):
     return df
 
 
-def add_cycles(df):
-    # todo
-    # mols = df['Smiles'].apply(Chem.MolFromSmiles)
-    #
-    # return 'a'
-    return df
-
-
 def unique_count(column):
     return column.name, len(column.unique())
 
@@ -189,13 +164,84 @@ def remove_useless_columns(df):
     return df
 
 
+def get_correlated_descriptors(df, threshold):
+    correlations = df.corr().abs()
+
+    # half of table only
+    mask = np.triu(np.ones_like(correlations, dtype=bool))
+
+    # high correlations only, other values nan
+    correlations.mask(mask, inplace=True)
+    correlations = correlations.applymap(lambda x: x if x > threshold else np.nan)
+    correlations = correlations.loc[~(correlations.isna()).all(axis=1)]
+    correlations = correlations.loc[:, ~(correlations.isna()).all(axis=0)]
+
+    fig, ax = plt.subplots(figsize=(8.27, 8.27))
+    sns.heatmap(correlations, cmap='gist_heat', square=True, ax=ax)
+
+    fig.suptitle('Strong correlations values', fontsize=16)
+
+    plt.tight_layout()
+    plt.show()
+    plt.close()
+
+    fig.savefig('./correlations_heatmap.jpeg')
+
+    return correlations
+
+
+def create_correlation_graphs(correlations):
+    MG = nx.MultiGraph()
+    columns = correlations.columns
+
+    # get edges between nodes
+    for index, row in correlations.iterrows():
+        new_edges = [(index, col, row[col]) for col in columns if not np.isnan(row[col])]
+        MG.add_weighted_edges_from(new_edges)
+
+    subgraphs = [MG.subgraph(c) for c in nx.connected_components(MG)]
+
+    fig, axes = plt.subplots(len(subgraphs), figsize=(8.27, 11.69))
+    axes = axes.flatten()
+
+    for i, sg in enumerate(subgraphs):
+        nodes = sg.nodes
+        nx.draw(sg, with_labels=True, font_weight='bold' , font_size=8 , pos=nx.circular_layout(sg), ax=axes[i])
+        logging.info(f'Subgraph {i}: {nodes}')
+
+    fig.suptitle('Strong correlations graph', fontsize=16)
+
+    plt.tight_layout()
+    plt.show()
+    plt.close()
+
+    fig.savefig('./correlations_grapgs.jpeg')
+
+    return subgraphs
+
+
+def get_correlated_descriptors_to_delete(graphs) -> list:
+    return [node for sg in graphs for i, node in enumerate(sg.nodes) if i != 0]
+
+
+def remove_correlated_column(df, trashhold=0.9) -> pd.DataFrame:
+    correlations = get_correlated_descriptors(df, trashhold)
+    graphs = create_correlation_graphs(correlations)
+    to_delete = get_correlated_descriptors_to_delete(graphs)
+    df.drop(to_delete, axis=1, inplace=True)
+    logging.info(f'Removing correlated columns: {to_delete}')
+    return df
+
+
 def main():
     pubchem = get_pubchem(["./data/pubchem_raw.csv", ], replace=True)
     swiss = get_swiss(["./data/swissadme_raw.csv", ], replace=True)
 
     df = merge_pubchem_swiss(pubchem, swiss)
-    df = add_cycles(df)
     df = remove_useless_columns(df)
+    df = remove_correlated_column(df)
+
+    df.to_csv('./data/cleaned.csv', index=False)
 
 
 if __name__ == "__main__":
