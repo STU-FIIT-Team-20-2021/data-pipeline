@@ -11,7 +11,9 @@ if __name__ == "__main__":
     parser.add_argument('-outputfile', type=str, help="Output file destination.")
     args = parser.parse_args()
 
-    crawler.main(args.inputfile if args.inputfile else "./data/input_data/chem.csv")
+    #crawler.main(args.inputfile if args.inputfile else "./data/input_data/chem.csv")
+    #merger.merge()
+    cleaner.main()
 
     if args.outputfile:
         shutil.copy("./data/final/chem.csv", args.outputfile)

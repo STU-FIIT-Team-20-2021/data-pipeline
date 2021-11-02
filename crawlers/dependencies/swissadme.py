@@ -27,6 +27,7 @@ def crawl(prefs):
 
     options.add_experimental_option("prefs", prefs)
     driver = webdriver.Chrome('crawlers/dependencies/chromedriver.exe', options=options)
+    driver.set_page_load_timeout(1200)
 
     pubchem_df = pd.read_csv('data/crawler_output/pubchem.csv')
     smiles_list = pubchem_df['Smiles']
