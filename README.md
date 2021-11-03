@@ -1,13 +1,8 @@
 # Usage:
 
-**Data folder must contain:**
-- merged.csv (up to date data)
-- new_pubchem.csv (new pubchem scrape)
-- new_swiss.csv (new swissadme scrape)
+merger.py automatically attempts to read **'new_pubchem.csv'** and **'new_swiss.csv'** from **./data** and then outputs **./merger/merge.csv**
 
-The new_pubchem and new_swiss csv files must have the same ordering of new compounds.
-Once files are in the right place, just run **merger.py** to update merged.csv
+Altnernatively, use **merger.py -h** to show arguments that allow passing of specific files on input.
 
-### populate_chem.py
-
-Populates the new_merged.csv with chemical information using rdkit (cycles, charges, etc.)
+---
+populate_chem.py attempts to read data from **./merger/merge.csv** then output it to **./chem/new_attrib.csv**
