@@ -3,6 +3,7 @@ from rdkit.Chem import AllChem
 import pandas as pd
 import numpy as np
 from math import log
+import os
 
 
 def populate():
@@ -42,7 +43,13 @@ def populate():
     converted = [0 if x == 0 else log(x, 16) for x in converted]
     df['cycle_type_counts'] = converted
 
-    df.to_csv('data/final/phototox.csv', index=False)
+    if os.path.isfile('data/final/phototox.csv'):
+        df_old = pd.read_csv('data/final/phototox.csv')
+        df = pd.concat([df_old, df], axis=0)
+        df.to_csv('data/final/phototox.csv', index=False)
+        df_old.to_csv('data/final/phototox_old.csv')
+    else:
+        df.to_csv('data/final/phototox.csv', index=False)
 
 
 if __name__ == "__main__":
