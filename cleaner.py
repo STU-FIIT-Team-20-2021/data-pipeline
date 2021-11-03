@@ -1,8 +1,10 @@
+from libxml2 import treeError
 from unittest.mock import inplace
 
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from scipy import stats
 import matplotlib.pyplot as plt
 import os.path
 
@@ -15,90 +17,6 @@ logging.getLogger().setLevel(logging.INFO)
 
 # poands discribe
 # by model analysis vuci phototox
-
-# *********  Other ********************************************************
-
-def drop_duplicits(df: pd.DataFrame, subset, keep='first'):
-    logging.warning(f"Found duplicates:{df[df.duplicated(subset=subset, keep=keep)][subset].to_list()} deleted.")
-    df.drop_duplicates(subset=subset, keep=keep, inplace=True)
-
-
-# ********* PUBCHEM ********************************************************
-
-def load_multiple_csv(csv_names: list):
-    all_df = [pd.read_csv(name) for name in csv_names]
-    return pd.concat(all_df)
-
-
-def clean_pubchem(pubchem):
-    pubchem = pubchem.drop(columns='Unnamed: 0')
-    drop_duplicits(pubchem, subset="Smiles", keep='first')
-
-    pubchem.loc[:, 'Topological Polar Surface Area'] = pubchem.loc[:, 'Topological Polar Surface Area'].astype(
-        str).str.replace(' Å²', '')
-    pubchem.replace({'Compound Is Canonicalized': {'Yes': True, 'No': False}})
-
-    dtypes_columns = {bool: ['Phototoxic', 'Compound Is Canonicalized'], str: ['Name', ],
-                      float: ['Molecular Weight', 'Exact Mass', 'Monoisotopic Mass', 'Topological Polar Surface Area',
-                              'Complexity', 'XLogP3', 'XLogP3-AA'],
-                      int: ['Hydrogen Bond Donor Count', 'Hydrogen Bond Acceptor Count', 'Rotatable Bond Count',
-                            'Heavy Atom Count', 'Formal Charge', 'Isotope Atom Count',
-                            'Defined Atom Stereocenter Count',
-                            'Defined Bond Stereocenter Count', 'Undefined Atom Stereocenter Count',
-                            'Covalently-Bonded Unit Count']}
-    dtypes_columns = {col: dt for dt, columns in dtypes_columns.items() for col in columns}
-    pubchem = pubchem.astype(dtypes_columns)
-
-    return pubchem
-
-
-def get_pubchem(input_csv_files, output_csv_file='./data/pubchem.csv', replace=True):
-    if os.path.isfile(output_csv_file) and not replace:
-        return pd.read_csv(output_csv_file)
-
-    pubchem = load_multiple_csv(input_csv_files)
-    pubchem = clean_pubchem(pubchem)
-
-    pubchem.to_csv(output_csv_file)
-    return pubchem
-
-
-# ********* SWISS ********************************************************
-
-def clean_swiss(swiss):
-    drop_duplicits(swiss, subset="Smiles", keep='first')
-
-    replace_dict = {'Low': False, 'High': True, 'Yes': True, 'No': False}
-
-    for repl, val in replace_dict.items():
-        swiss.replace(repl, val, inplace=True)
-
-    # its only cathegory based on previous values
-    swiss.drop(columns={'ESOL Class', 'Ali Class', 'Silicos-IT class'}, inplace=True)
-    # only different unit
-    swiss.drop(columns={'ESOL Solubility (mol/l)', 'Ali Solubility (mol/l)', 'Silicos-IT Solubility (mol/l)'},
-               inplace=True)
-    # todo check their logs on correlation
-
-    dtypes_columns = {str: ['Smiles', 'Formula', 'Name', 'Formula', ],
-                      bool: ['BBB permeant', 'Pgp substrate', 'CYP1A2 inhibitor', 'CYP2C19 inhibitor',
-                             'CYP2C9 inhibitor', 'CYP2D6 inhibitor', 'CYP3A4 inhibitor', 'GI absorption']}
-
-    dtypes_columns = {col: dt for dt, columns in dtypes_columns.items() for col in columns}
-    swiss = swiss.astype(dtypes_columns)
-
-    return swiss
-
-
-def get_swiss(input_csv_files, output_csv_file='./data/swiss.csv', replace=True):
-    if os.path.isfile(output_csv_file) and not replace:
-        return pd.read_csv(output_csv_file)
-
-    swiss = load_multiple_csv(input_csv_files)
-    swiss = clean_swiss(swiss)
-
-    swiss.to_csv(output_csv_file)
-    return swiss
 
 
 def log_unique_ds_count(left, right, on='Name'):
@@ -149,11 +67,48 @@ def merge_pubchem_swiss(pubchem, swiss):
     return df
 
 
+#  *************************** NEW ************************************
+def load_data(csv_file_name):
+    return pd.read_csv(csv_file_name)
+
+
+def set_proper_data_type(df):
+    replace_dict = {'Low': False, 'High': True, 'Yes': True, 'No': False}
+
+    for repl, val in replace_dict.items():
+        df.replace(repl, val, inplace=True)
+
+    dtypes_columns = {
+        bool: ['Phototoxic', 'Compound Is Canonicalized', 'BBB permeant', 'Pgp substrate', 'CYP1A2 inhibitor',
+               'CYP2C9 inhibitor', 'CYP2D6 inhibitor', 'CYP3A4 inhibitor', 'GI absorption'],
+        str: ['Name', 'Smiles', 'Formula', ],
+        float: ['Molecular Weight', 'Exact Mass', 'Monoisotopic Mass', 'Topological Polar Surface Area',
+                'Complexity', 'XLogP3', 'XLogP3-AA'],
+        int: ['Hydrogen Bond Donor Count', 'Hydrogen Bond Acceptor Count', 'Rotatable Bond Count',
+              'Heavy Atom Count', 'Formal Charge', 'Isotope Atom Count',
+              'Defined Bond Stereocenter Count', 'Undefined Atom Stereocenter Count',
+              'Covalently-Bonded Unit Count']
+    }
+
+    all_columns = df.columns
+    dtypes_columns = {col: dt for dt, columns in dtypes_columns.items() for col in columns if col in all_columns}
+    df = df.astype(dtypes_columns)
+
+    return df
+
+
 def unique_count(column):
     return column.name, len(column.unique())
 
 
 def remove_useless_columns(df):
+    # its only cathegory based on previous values
+    df.drop(columns={'ESOL Class', 'Ali Class', 'Silicos-IT class'}, inplace=True)
+    # only different unit
+    df.drop(columns={'ESOL Solubility (mol/l)', 'Ali Solubility (mol/l)', 'Silicos-IT Solubility (mol/l)'},
+            inplace=True)
+
+    # remove columns with one value only
     column_unique_count = df.apply(unique_count, axis=0).transpose()
     columns_to_remove = column_unique_count[column_unique_count[1] <= 1][0].to_list()
 
@@ -161,10 +116,23 @@ def remove_useless_columns(df):
         logging.info(f'Removing columns {columns_to_remove} with only one unique value')
         df.drop(columns=columns_to_remove, inplace=True)
 
+    # remove duplicit columns in pubchem - they contain values based on bad smiles code
+    punches_duplicity_columns = ['Heavy Atom Count', 'Hydrogen Bond Donor Count', 'Hydrogen Bond Acceptor Count',
+                                 'Rotatable Bond Count', 'Topological Polar Surface Area', 'Molecular Weight']
+    # todo check na tretnuti
+    logp_duplicity_columns = ['XLogP3-AA', 'XLogP3']
+    df.drop(columns=punches_duplicity_columns + logp_duplicity_columns, inplace=True)
+
+    # remove duplicit columns caused by merge
+    df.drop(columns=['Smiles.1', 'Name.1'], inplace=True)
     return df
 
 
-def get_correlated_descriptors(df, threshold):
+def get_correlated_descriptors_to_delete(graphs) -> list:
+    return [node for sg in graphs for i, node in enumerate(sg.nodes) if i != 0]
+
+
+def get_correlated_descriptors(df, threshold, fig_location):
     correlations = df.corr().abs()
 
     # half of table only
@@ -179,18 +147,18 @@ def get_correlated_descriptors(df, threshold):
     fig, ax = plt.subplots(figsize=(8.27, 8.27))
     sns.heatmap(correlations, cmap='gist_heat', square=True, ax=ax)
 
-    fig.suptitle('Strong correlations values', fontsize=16)
+    fig.suptitle(f'Strong correlations values ({threshold})', fontsize=16)
 
     plt.tight_layout()
     plt.show()
     plt.close()
 
-    fig.savefig('./correlations_heatmap.jpeg')
+    fig.savefig(fig_location)
 
     return correlations
 
 
-def create_correlation_graphs(correlations):
+def create_correlation_graphs(correlations, fig_location, trashold):
     MG = nx.MultiGraph()
     columns = correlations.columns
 
@@ -206,42 +174,69 @@ def create_correlation_graphs(correlations):
 
     for i, sg in enumerate(subgraphs):
         nodes = sg.nodes
-        nx.draw(sg, with_labels=True, font_weight='bold' , font_size=8 , pos=nx.circular_layout(sg), ax=axes[i])
+        nx.draw(sg, with_labels=True, font_weight='bold', font_size=8, pos=nx.circular_layout(sg), ax=axes[i])
         logging.info(f'Subgraph {i}: {nodes}')
 
-    fig.suptitle('Strong correlations graph', fontsize=16)
+    fig.suptitle(f'Strong correlations graph {trashold}', fontsize=16)
 
     plt.tight_layout()
     plt.show()
     plt.close()
 
-    fig.savefig('./correlations_grapgs.jpeg')
+    fig.savefig(fig_location)
 
     return subgraphs
 
 
-def get_correlated_descriptors_to_delete(graphs) -> list:
-    return [node for sg in graphs for i, node in enumerate(sg.nodes) if i != 0]
-
-
-def remove_correlated_column(df, trashhold=0.9) -> pd.DataFrame:
-    correlations = get_correlated_descriptors(df, trashhold)
-    graphs = create_correlation_graphs(correlations)
+def check_correlated_column(df, trashhold=0.9, remove=False, graph_location='./plot/correlations_grapgs.jpeg',
+                            heatmap_location='./plot/correlations_heatmap.jpeg') -> pd.DataFrame:
+    correlations = get_correlated_descriptors(df, trashhold, heatmap_location)
+    graphs = create_correlation_graphs(correlations, graph_location, trashhold)
     to_delete = get_correlated_descriptors_to_delete(graphs)
-    df.drop(to_delete, axis=1, inplace=True)
+    if remove:
+        df.drop(to_delete, axis=1, inplace=True)
     logging.info(f'Removing correlated columns: {to_delete}')
     return df
 
 
+def remove_duplicits(df: pd.DataFrame, subset, keep='first'):
+    # todo check phototox
+    duplicits = df[df.duplicated(subset=subset, keep=keep)]
+
+    logging.warning(f"Found duplicates:{duplicits[subset].to_list()} deleted.")
+    df.drop_duplicates(subset=subset, keep=keep, inplace=True)
+
+    return df
+
+
+def check_outliers(df, remove=False):
+    numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
+    df_numeric = df.select_dtypes(include=numerics)
+
+    outliers = df[~(np.abs(stats.zscore(df_numeric)) < 4.2).all(axis=1)]['Name'].unique()
+
+    logging.info(f'Outliners: {outliers}')
+
+    if remove:
+        df = df[~df['Name'].isin(outliers)]
+        logging.info(f'Outliners {outliers} deleted.')
+
+    return df
+
+
 def main():
-    pubchem = get_pubchem(["./data/pubchem_raw.csv", ], replace=True)
-    swiss = get_swiss(["./data/swissadme_raw.csv", ], replace=True)
+    input = 'data/merger_output/merged.csv'
+    output = 'data/cleaner_output/cleaned.csv'
 
-    df = merge_pubchem_swiss(pubchem, swiss)
+    df = load_data(input)
     df = remove_useless_columns(df)
-    df = remove_correlated_column(df)
+    df = set_proper_data_type(df)
 
-    df.to_csv('./data/cleaned.csv', index=False)
+    df = check_correlated_column(df)
+    df = remove_duplicits(df, subset="Smiles", keep='first')
+    df = check_outliers(df)
+
+    df.to_csv(output, index=False)
 
 
 if __name__ == "__main__":
