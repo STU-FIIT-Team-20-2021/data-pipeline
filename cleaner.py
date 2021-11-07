@@ -149,21 +149,25 @@ def create_correlation_graphs(correlations, fig_location, threshold):
     return subgraphs
 
 
-def save_mask(df, mask_name, columns: [None, list] = None, mask: [None, list] = None, ):
-    if mask is None and columns is not None:
+def save_mask(df, mask_name, columns: [None, list] = None, rows: [None, list] = None, ):
+    if rows is None and columns is not None:
         mask = (df == df) & (~df.columns.isin(columns))
-    elif mask is None:
+    elif rows is not None and columns is None:
+        mask = pd.DataFrame().reindex_like(df)
+        for col in df.columns:
+            mask[col] = rows
+    else:
         raise KeyError('Columns or mask must be specified')
 
     mask.to_csv(f'data/masks/{mask_name}.csv', index=False)
 
 
 def check_correlated_column(df, threshold=0.9, remove=False, preserve_columns=[],
-                            graph_location='./plot/correlations_grapgs.jpeg',
-                            heatmap_location='./plot/correlations_heatmap.jpeg') -> pd.DataFrame:
+                            graph_location='./plot/correlations_grapgs_{}.jpeg',
+                            heatmap_location='./plot/correlations_heatmap_{}.jpeg') -> pd.DataFrame:
 
-    correlations = get_correlated_descriptors(df, threshold, heatmap_location)
-    graphs = create_correlation_graphs(correlations, graph_location, threshold)
+    correlations = get_correlated_descriptors(df, threshold, heatmap_location.format(threshold))
+    graphs = create_correlation_graphs(correlations, graph_location.format(threshold), threshold)
     duplicit_correlated = get_duplicit_correlated_descriptors(graphs, preserve_columns)
 
     if remove:
@@ -197,7 +201,7 @@ def check_outliers(df, threshold=4.2, remove=False):
         df = df[rows]
         logging.info(f'Outliners {outliers} deleted.')
     else:
-        save_mask(df, mask_name='outliers_' + str(threshold), mask=rows)
+        save_mask(df, mask_name='outliers_' + str(threshold), rows=rows)
 
     return df
 
