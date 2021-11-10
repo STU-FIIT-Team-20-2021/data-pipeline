@@ -7,7 +7,7 @@ import os
 
 
 def populate():
-    df = pd.read_csv('data/cleaner_output/cleaned.csv')
+    df = pd.read_csv('data/merger_output/merged.csv')
 
     smiles = df['Smiles'].values.copy()
 
@@ -27,6 +27,7 @@ def populate():
     df['atom_valence'] = count_valence
     df['negative_gesteiger'] = negative_gesteiger_sum
     df['positive_gesteiger'] = positive_gesteiger_sum
+    df['sum_gesteiger'] = (df['negative_gesteiger'] + df['positive_gesteiger']) * 10 ** 16
     df['hydrogen_count'] = hydrogen_count
 
     rings = [x.GetRingInfo().BondRings() for x in smiles]
@@ -46,10 +47,10 @@ def populate():
     if os.path.isfile('data/final/phototox.csv'):
         df_old = pd.read_csv('data/final/phototox.csv')
         df = pd.concat([df_old, df], axis=0)
-        df.to_csv('data/final/phototox.csv', index=False)
+        df.to_csv('data/chem_output/chem_populated.csv', index=False)
         df_old.to_csv('data/final/phototox_old.csv')
     else:
-        df.to_csv('data/final/phototox.csv', index=False)
+        df.to_csv('data/chem_output/chem_populated.csv', index=False)
 
 
 if __name__ == "__main__":

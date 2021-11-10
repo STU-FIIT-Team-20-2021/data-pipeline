@@ -15,8 +15,8 @@ if __name__ == "__main__":
     if not args.noscrape:
         crawler.main(args.inputfile if args.inputfile else "./data/input_data/chem.csv")
     merger.merge()
-    cleaner.main()
     populate_chem.populate()
+    cleaner.main()
 
     if args.outputfile:
         shutil.copy("./data/final/chem.csv", args.outputfile)

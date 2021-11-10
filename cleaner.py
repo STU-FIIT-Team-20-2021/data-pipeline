@@ -225,8 +225,8 @@ def check_outliers(df, remove=False):
 
 
 def main():
-    input = 'data/merger_output/merged.csv'
-    output = 'data/cleaner_output/cleaned.csv'
+    input = 'data/chem_output/chem_populated.csv'
+    output = 'data/final/phototox.csv'
 
     df = load_data(input)
     df = remove_useless_columns(df)
