@@ -19,4 +19,4 @@ if __name__ == "__main__":
     cleaner.main()
 
     if args.outputfile:
-        shutil.copy("./data/final/chem.csv", args.outputfile)
+        shutil.copy("./data/final/phototox.csv", args.outputfile)
