@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from rdkit import Chem
 from rdkit.Chem import AllChem
 import rdkit.Chem.rdMolDescriptors as Mol
@@ -12,7 +10,7 @@ import os
 
 
 def populate():
-    df = pd.read_csv('data/merger_output/merged.csv')
+    df = pd.read_csv('../data/merger_output/merged.csv')
 
     smiles = df['Smiles'].values.copy()
 

@@ -3,8 +3,8 @@ import argparse
 
 
 def merge():
-    file_pubchem = 'data/crawler_output/pubchem.csv'
-    file_swiss = 'data/crawler_output/swiss.csv'
+    file_pubchem = '../data/crawler_output/pubchem.csv'
+    file_swiss = '../data/crawler_output/swiss.csv'
     out = 'data/merger_output/merged.csv'
 
     df_swiss = pd.read_csv(file_swiss)

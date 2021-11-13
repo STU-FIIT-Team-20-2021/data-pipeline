@@ -1,6 +1,3 @@
-from libxml2 import treeError
-from unittest.mock import inplace
-
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -261,5 +258,5 @@ def process_config(config_file='conf/cleaner.ini') -> dict:
 
 
 if __name__ == "__main__":
-    args = process_config('conf/cleaner.ini')
-    main('data/chem_output/chem_populated.csv', 'data/final/phototox.csv', **args)
+    args = process_config('../conf/cleaner.ini')
+    main('../data/chem_output/chem_populated.csv', 'data/final/phototox.csv', **args)

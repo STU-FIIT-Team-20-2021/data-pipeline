@@ -1,8 +1,7 @@
 import os
 import shutil
-from crawlers.dependencies import pubchem
-from crawlers.dependencies import swissadme
-from crawlers.dependencies import swisstarget
+from scripts.crawlers.dependencies import pubchem
+from scripts.crawlers.dependencies import swissadme
 
 
 def main(file):

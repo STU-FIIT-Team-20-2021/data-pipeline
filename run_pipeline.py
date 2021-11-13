@@ -1,7 +1,5 @@
-import cleaner
-import merger
-import populate_chem
-import crawlers.crawler_orchestrator as crawler
+from scripts import populate_chem, cleaner, merger
+import scripts.crawlers.crawler_orchestrator as crawler
 import argparse
 import shutil
 
