@@ -1,0 +1,159 @@
+\begin{theindex}
+
+  \item {\_\_init\_\_}
+    \subitem {pipe\_handler.IgnoreBrokenPipe}, \hyperpage{18}
+
+  \indexspace
+
+  \item {args}
+    \subitem {cleaner}, \hyperpage{13}
+    \subitem {run\_pipeline}, \hyperpage{16}
+
+  \indexspace
+
+  \item {check\_correlated\_column}
+    \subitem {cleaner}, \hyperpage{11}
+  \item {check\_outliers}
+    \subitem {cleaner}, \hyperpage{11}
+  \item {cleaner}, \hyperpage{11}
+    \subitem {args}, \hyperpage{13}
+    \subitem {check\_correlated\_column}, \hyperpage{11}
+    \subitem {check\_outliers}, \hyperpage{11}
+    \subitem {create\_correlation\_graphs}, \hyperpage{12}
+    \subitem {get\_correlated\_descriptors}, \hyperpage{12}
+    \subitem {get\_duplicit\_correlated\_descriptors}, \hyperpage{12}
+    \subitem {load\_data}, \hyperpage{12}
+    \subitem {main}, \hyperpage{12}
+    \subitem {process\_config}, \hyperpage{12}
+    \subitem {remove\_duplicits}, \hyperpage{12}
+    \subitem {remove\_useless\_columns}, \hyperpage{13}
+    \subitem {save\_mask}, \hyperpage{13}
+    \subitem {set\_proper\_data\_type}, \hyperpage{13}
+    \subitem {unique\_count}, \hyperpage{13}
+  \item {cleaner.py}, \hyperpage{19}
+  \item {crawl}
+    \subitem {dependencies.pubchem}, \hyperpage{14}
+    \subitem {dependencies.swissadme}, \hyperpage{14}
+    \subitem {dependencies.swisstarget}, \hyperpage{14}
+  \item {crawler\_orchestrator}, \hyperpage{13}
+    \subitem {main}, \hyperpage{13}
+  \item {crawlers/crawler\_orchestrator.py}, \hyperpage{19}
+  \item {crawlers/dependencies/\_\_init\_\_.py}, \hyperpage{19}
+  \item {crawlers/dependencies/pubchem.py}, \hyperpage{20}
+  \item {crawlers/dependencies/swissadme.py}, \hyperpage{20}
+  \item {crawlers/dependencies/swisstarget.py}, \hyperpage{20}
+  \item {create\_correlation\_graphs}
+    \subitem {cleaner}, \hyperpage{12}
+
+  \indexspace
+
+  \item {dependencies}, \hyperpage{14}
+  \item {dependencies.pubchem}, \hyperpage{14}
+    \subitem {crawl}, \hyperpage{14}
+  \item {dependencies.swissadme}, \hyperpage{14}
+    \subitem {crawl}, \hyperpage{14}
+    \subitem {is\_file\_downloaded}, \hyperpage{14}
+  \item {dependencies.swisstarget}, \hyperpage{14}
+    \subitem {crawl}, \hyperpage{14}
+    \subitem {is\_file\_downloaded}, \hyperpage{15}
+
+  \indexspace
+
+  \item {flush}
+    \subitem {pipe\_handler.IgnoreBrokenPipe}, \hyperpage{18}
+
+  \indexspace
+
+  \item {get\_correlated\_descriptors}
+    \subitem {cleaner}, \hyperpage{12}
+  \item {get\_duplicit\_correlated\_descriptors}
+    \subitem {cleaner}, \hyperpage{12}
+
+  \indexspace
+
+  \item {help}
+    \subitem {run\_pipeline}, \hyperpage{16}
+
+  \indexspace
+
+  \item {is\_file\_downloaded}
+    \subitem {dependencies.swissadme}, \hyperpage{14}
+    \subitem {dependencies.swisstarget}, \hyperpage{15}
+
+  \indexspace
+
+  \item {load\_data}
+    \subitem {cleaner}, \hyperpage{12}
+
+  \indexspace
+
+  \item {main}
+    \subitem {cleaner}, \hyperpage{12}
+    \subitem {crawler\_orchestrator}, \hyperpage{13}
+  \item {merge}
+    \subitem {merger}, \hyperpage{15}
+  \item {merger}, \hyperpage{15}
+    \subitem {merge}, \hyperpage{15}
+  \item {merger.py}, \hyperpage{20}
+
+  \indexspace
+
+  \item {parser}
+    \subitem {run\_pipeline}, \hyperpage{16}
+  \item {pipe\_handler}, \hyperpage{15}
+  \item {pipe\_handler.IgnoreBrokenPipe}, \hyperpage{17}
+    \subitem {\_\_init\_\_}, \hyperpage{18}
+    \subitem {flush}, \hyperpage{18}
+    \subitem {stream}, \hyperpage{18}
+    \subitem {write}, \hyperpage{18}
+  \item {pipe\_handler.py}, \hyperpage{20}
+  \item {populate}
+    \subitem {populate\_chem}, \hyperpage{15}
+  \item {populate\_chem}, \hyperpage{15}
+    \subitem {populate}, \hyperpage{15}
+  \item {populate\_chem.py}, \hyperpage{20}
+  \item {process\_config}
+    \subitem {cleaner}, \hyperpage{12}
+
+  \indexspace
+
+  \item {README.md}, \hyperpage{21}
+  \item {remove\_duplicits}
+    \subitem {cleaner}, \hyperpage{12}
+  \item {remove\_useless\_columns}
+    \subitem {cleaner}, \hyperpage{13}
+  \item {run\_pipeline}, \hyperpage{15}
+    \subitem {args}, \hyperpage{16}
+    \subitem {help}, \hyperpage{16}
+    \subitem {parser}, \hyperpage{16}
+    \subitem {str}, \hyperpage{16}
+    \subitem {type}, \hyperpage{16}
+  \item {run\_pipeline.py}, \hyperpage{21}
+
+  \indexspace
+
+  \item {save\_mask}
+    \subitem {cleaner}, \hyperpage{13}
+  \item {set\_proper\_data\_type}
+    \subitem {cleaner}, \hyperpage{13}
+  \item {str}
+    \subitem {run\_pipeline}, \hyperpage{16}
+  \item {stream}
+    \subitem {pipe\_handler.IgnoreBrokenPipe}, \hyperpage{18}
+
+  \indexspace
+
+  \item {type}
+    \subitem {run\_pipeline}, \hyperpage{16}
+
+  \indexspace
+
+  \item {unique\_count}
+    \subitem {cleaner}, \hyperpage{13}
+
+  \indexspace
+
+  \item {write}
+    \subitem {pipe\_handler.IgnoreBrokenPipe}, \hyperpage{18}
+
+\end{theindex}
