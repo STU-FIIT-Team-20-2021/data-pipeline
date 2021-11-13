@@ -75,7 +75,8 @@ def remove_useless_columns(df):
     df.drop(columns=punches_duplicity_columns, inplace=True)
 
     # remove duplicit columns from swiss and computed columns
-    swiss_duplicity_columns = ['TPSA', '#H-bond acceptors', '#H-bond donors', '#Aromatic heavy atoms', 'Fraction Csp3', 'Ali Solubility (mg/ml)', 'ESOL Solubility (mg/ml)']
+    swiss_duplicity_columns = ['TPSA', '#H-bond acceptors', '#H-bond donors', '#Aromatic heavy atoms', 'Fraction Csp3',
+                               'Ali Solubility (mg/ml)', 'ESOL Solubility (mg/ml)']
     df.drop(columns=swiss_duplicity_columns, inplace=True)
 
     # remove duplicit columns caused by merge
@@ -232,7 +233,12 @@ def main(input_file, output_file, correlation_threshold=0.95, outliers_threshold
     df.to_csv(output_file, index=False)
 
 
-def process_config(config_file='conf/cleaner.ini'):
+def process_config(config_file='conf/cleaner.ini') -> dict:
+    """
+    Process input config and extract
+    :param config_file: config file name location
+    :return: confuguration
+    """
     if not os.path.exists(config_file):
         logging.warning(f'Config file {config_file} does not exist. Running with default setting.')
         return dict()
