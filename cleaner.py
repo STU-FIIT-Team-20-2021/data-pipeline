@@ -74,6 +74,10 @@ def remove_useless_columns(df):
                                  'XLogP3-AA', 'XLogP3']
     df.drop(columns=punches_duplicity_columns, inplace=True)
 
+    # remove duplicit columns from swiss and computed columns
+    swiss_duplicity_columns = ['TPSA', '#H-bond acceptors', '#H-bond donors', '#Aromatic heavy atoms', 'Fraction Csp3', 'Ali Solubility (mg/ml)', 'ESOL Solubility (mg/ml)']
+    df.drop(columns=swiss_duplicity_columns, inplace=True)
+
     # remove duplicit columns caused by merge
     df.drop(columns=['Smiles.1', 'Name.1'], inplace=True)
     return df
