@@ -165,7 +165,6 @@ def save_mask(df, mask_name, columns: [None, list] = None, rows: [None, list] = 
 def check_correlated_column(df, threshold=0.9, remove=False, preserve_columns=[],
                             graph_location='./plot/correlations_grapgs_{}.jpeg',
                             heatmap_location='./plot/correlations_heatmap_{}.jpeg') -> pd.DataFrame:
-
     correlations = get_correlated_descriptors(df, threshold, heatmap_location.format(threshold))
     graphs = create_correlation_graphs(correlations, graph_location.format(threshold), threshold)
     duplicit_correlated = get_duplicit_correlated_descriptors(graphs, preserve_columns)
@@ -179,8 +178,15 @@ def check_correlated_column(df, threshold=0.9, remove=False, preserve_columns=[]
 
 
 def remove_duplicits(df: pd.DataFrame, subset, keep='first'):
-    # todo check phototox
     duplicits = df[df.duplicated(subset=subset, keep=keep)]
+    duplicits_smiles = duplicits['Smiles'].to_list()
+
+    for smile in duplicits_smiles:
+        phototox = df.loc[df["Smiles"] == smile, 'Phototoxic']
+        if phototox.all() != phototox.any():
+            logging.error(
+                f'There are two duplicit rows with same smiles, but diffrent phototox value. Removing one of them.'
+                f'Names: {df.loc[df["Smiles"] == smile, "Name"]}')
 
     logging.warning(f"Found duplicates:{duplicits[subset].to_list()} deleted.")
     df.drop_duplicates(subset=subset, keep=keep, inplace=True)
