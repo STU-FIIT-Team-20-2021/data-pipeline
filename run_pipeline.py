@@ -11,7 +11,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if not args.noscrape:
-        crawler.main(args.inputfile if args.inputfile else "./data/input_data/chem.csv")
+        crawler.main(args.inputfile if args.inputfile else "./data/input_data/input.csv")
     merger.merge()
     populate_chem.populate()
     cleaner.main()

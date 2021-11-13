@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-import seaborn as sns
+#import seaborn as sns
 from scipy import stats
 import matplotlib.pyplot as plt
 import configparser
@@ -108,7 +108,7 @@ def get_correlated_descriptors(df, threshold, fig_location):
     correlations = correlations.loc[:, ~(correlations.isna()).all(axis=0)]
 
     fig, ax = plt.subplots(figsize=(8.27, 8.27))
-    sns.heatmap(correlations, cmap='gist_heat', square=True, ax=ax)
+    #sns.heatmap(correlations, cmap='gist_heat', square=True, ax=ax)
 
     fig.suptitle(f'Strong correlations values ({threshold})', fontsize=16)
 
