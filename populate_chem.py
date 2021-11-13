@@ -1,7 +1,12 @@
+from pprint import pprint
+
 from rdkit import Chem
 from rdkit.Chem import AllChem
-import pandas as pd
+import rdkit.Chem.rdMolDescriptors as Mol
+import rdkit.Chem.Crippen as Crip
+import rdkit.Chem.Descriptors as Desc
 import numpy as np
+import pandas as pd
 from math import log
 import os
 
@@ -12,7 +17,7 @@ def populate():
     smiles = df['Smiles'].values.copy()
 
     for idx, smile in enumerate(smiles):
-        smiles[idx] = Chem.MolFromSmiles(smile)
+        smiles[idx] = Chem.AddHs(Chem.MolFromSmiles(smile))
 
     [AllChem.ComputeGasteigerCharges(y) for y in smiles]
     
@@ -21,14 +26,55 @@ def populate():
     gesteiger_charges = [[float(x.GetProp("_GasteigerCharge")) for x in y.GetAtoms()] for y in smiles]
     positive_gesteiger_sum = [np.sum([y for y in x if y >= 0]) for x in gesteiger_charges]
     negative_gesteiger_sum = [np.sum([y for y in x if y < 0]) for x in gesteiger_charges]
+    positive_gesteiger_mean = [np.mean([y for y in x if y >= 0]) for x in gesteiger_charges]
+    negative_gesteiger_mean = [np.mean([y for y in x if y < 0]) for x in gesteiger_charges]
+    total_gesteiger_sum = [np.sum([y for y in x]) * 10 ** 16 for x in gesteiger_charges]
+    total_gesteiger_mean = [np.mean([y for y in x]) * 10 ** 16 for x in gesteiger_charges]
     hydrogen_count = [sum([x.GetAtomicNum() for x in y.GetAtoms() if x.GetAtomicNum() == 1]) for y in smiles]
+    carbon_count = [sum([x.GetAtomicNum() for x in y.GetAtoms() if x.GetAtomicNum() == 6]) for y in smiles]
+    csp3 = [Mol.CalcFractionCSP3(y) for y in smiles]
+    aha = [len([x for x in y.GetAtoms() if x.GetAtomicNum() != 1 and x.GetIsAromatic()]) for y in smiles]
+    drug = [sum([0 if -0.4 <= Crip.MolLogP(y, True) <= 5.6 else 1,
+                0 if 160 <= Desc.ExactMolWt(y) <= 480 else 1,
+                0 if 20 <= len(y.GetAtoms()) <= 70 else 1,
+                0 if 40 <= Crip.MolMR(y) <= 130 else 1,
+                0 if Mol.CalcNumRotatableBonds(y) <= 10 else 1]) for y in smiles]
+    kappa = [Mol.CalcKappa1(y) for y in smiles]
+    chi = [Mol.CalcChi0n(y) for y in smiles]
+    hallkier = [Mol.CalcHallKierAlpha(y) for y in smiles]
+    labute_asa = [Mol.CalcLabuteASA(y) for y in smiles]
+    phi = [Mol.CalcPhi(y) for y in smiles]
+    h_donors = [Mol.CalcNumHBD(y) for y in smiles]
+    h_acceptors = [Mol.CalcNumHBA(y) for y in smiles]
+    tpsa = [Mol.CalcTPSA(y) for y in smiles]
+    vsa = np.array([Mol.SlogP_VSA_(y) for y in smiles])
 
     df['cycles'] = cycles
     df['atom_valence'] = count_valence
-    df['negative_gesteiger'] = negative_gesteiger_sum
-    df['positive_gesteiger'] = positive_gesteiger_sum
-    df['sum_gesteiger'] = (df['negative_gesteiger'] + df['positive_gesteiger']) * 10 ** 16
+    df['negative_gesteiger_sum'] = negative_gesteiger_sum
+    df['positive_gesteiger_sum'] = positive_gesteiger_sum
+    df['negative_gesteiger_mean'] = negative_gesteiger_mean
+    df['positive_gesteiger_mean'] = positive_gesteiger_mean
+    df['sum_gesteiger_fromsum'] = (df['negative_gesteiger_sum'] + df['positive_gesteiger_sum']) * 10 ** 16
+    df['sum_gesteiger_frommean'] = (df['negative_gesteiger_mean'] + df['positive_gesteiger_mean'])
+    df['sum_gesteiger_totalsum'] = total_gesteiger_sum
+    df['sum_gesteiger_totalmean'] = total_gesteiger_mean
     df['hydrogen_count'] = hydrogen_count
+    df['csp3'] = csp3
+    df['aromatic_heavy_atoms'] = aha
+    df['chi0n'] = chi
+    df['hallkier'] = hallkier
+    df['kappa_1'] = kappa
+    df['labute_asa'] = labute_asa
+    df['phi'] = phi
+    df['h_donors'] = h_donors
+    df['h_acceptors'] = h_acceptors
+    df['carbon_count'] = carbon_count
+    df['tpsa'] = tpsa
+    df['druglikeliness'] = drug
+
+    for i, vsa_vals in enumerate(vsa.transpose()):
+        df[f'vsa_logP_{i}'] = vsa_vals[i]
 
     rings = [x.GetRingInfo().BondRings() for x in smiles]
     binarystr = ['0000000000000000'] * len(rings)
