@@ -6,8 +6,8 @@ import pandas as pd
 import seaborn as sns
 from scipy import stats
 import matplotlib.pyplot as plt
+import configparser
 import os.path
-
 import logging
 import networkx as nx
 
@@ -18,56 +18,6 @@ logging.getLogger().setLevel(logging.INFO)
 # poands discribe
 # by model analysis vuci phototox
 
-
-def log_unique_ds_count(left, right, on='Name'):
-    left_count = len(left[left[on].isin(right[on])])
-    right_count = len(right[right[on].isin(left[on])])
-    total = left_count + right_count
-    if total > 0:
-        logging.warning(f"Number of molecules not included in both datasets: {left_count + right_count}")
-
-
-def check_column_consistency(df, mapper: dict, percent_error=None):
-    for col1, col2 in mapper.items():
-        if percent_error is None:
-            is_equal = df[col1] != df[col2]
-            if not all(is_equal):
-                logging.error(
-                    f'Pubchem and swiss columns are not equal. '
-                    f'Columns "{col1}" and "{col2}" contain diffrent values by {df[~is_equal][col1].count()} rows')
-        else:
-            percent_difference = df[col2] / (df[col1] / 100)
-            difference = percent_difference < percent_error
-            if not all(difference):
-                logging.error(
-                    f'Pubchem and swiss columns are not equal. '
-                    f'Columns "{col1}" and "{col2}" differ more than {percent_error}% by '
-                    f'{df[~difference][col1].count()} rows')
-
-
-def merge_equal_columns(df):
-    int_pubchem_swiss_mapping = {'Heavy Atom Count': '#Heavy atoms', 'Hydrogen Bond Donor Count': '#H-bond donors',
-                                 'Hydrogen Bond Acceptor Count': '#H-bond acceptors',
-                                 'Rotatable Bond Count': '#Rotatable bonds'}
-    float_pubchem_swiss_mapping = {'Molecular Weight': 'MW'}
-
-    check_column_consistency(df, int_pubchem_swiss_mapping)
-    check_column_consistency(df, float_pubchem_swiss_mapping, 5)
-
-    df.drop(columns=[*int_pubchem_swiss_mapping.keys()], inplace=True)
-    df.drop(columns=[*float_pubchem_swiss_mapping.keys()], inplace=True)
-
-    return df
-
-
-def merge_pubchem_swiss(pubchem, swiss):
-    log_unique_ds_count(pubchem, swiss)
-    df = pd.merge(pubchem, swiss, how='outer', on='Name')
-    df = merge_equal_columns(df)
-    return df
-
-
-#  *************************** NEW ************************************
 def load_data(csv_file_name):
     return pd.read_csv(csv_file_name)
 
@@ -94,6 +44,8 @@ def set_proper_data_type(df):
     dtypes_columns = {col: dt for dt, columns in dtypes_columns.items() for col in columns if col in all_columns}
     df = df.astype(dtypes_columns)
 
+    df.rename(columns={'Ali Solubility (mg/ml)': 'Ali Solubility', 'ESOL Solubility (mg/ml)': 'ESOL Solubility'})
+
     return df
 
 
@@ -118,18 +70,32 @@ def remove_useless_columns(df):
 
     # remove duplicit columns in pubchem - they contain values based on bad smiles code
     punches_duplicity_columns = ['Heavy Atom Count', 'Hydrogen Bond Donor Count', 'Hydrogen Bond Acceptor Count',
-                                 'Rotatable Bond Count', 'Topological Polar Surface Area', 'Molecular Weight']
-    # todo check na tretnuti
-    logp_duplicity_columns = ['XLogP3-AA', 'XLogP3']
-    df.drop(columns=punches_duplicity_columns + logp_duplicity_columns, inplace=True)
+                                 'Rotatable Bond Count', 'Topological Polar Surface Area', 'Molecular Weight',
+                                 'XLogP3-AA', 'XLogP3']
+    df.drop(columns=punches_duplicity_columns, inplace=True)
+
+    # remove duplicit columns from swiss and computed columns
+    swiss_duplicity_columns = ['TPSA', '#H-bond acceptors', '#H-bond donors', '#Aromatic heavy atoms', 'Fraction Csp3',
+                               'Ali Solubility (mg/ml)', 'ESOL Solubility (mg/ml)']
+    df.drop(columns=swiss_duplicity_columns, inplace=True)
 
     # remove duplicit columns caused by merge
     df.drop(columns=['Smiles.1', 'Name.1'], inplace=True)
     return df
 
 
-def get_correlated_descriptors_to_delete(graphs) -> list:
-    return [node for sg in graphs for i, node in enumerate(sg.nodes) if i != 0]
+def get_duplicit_correlated_descriptors(graphs, descriptors) -> list:
+    duplicit_correlated = []
+    for subgraph in graphs:
+        nodes = [node for node in subgraph.nodes]
+        nodes_without_preserve = [node for node in nodes if node not in descriptors]
+
+        if len(nodes) == len(nodes_without_preserve):
+            duplicit_correlated = duplicit_correlated + nodes[:-1]
+        else:
+            duplicit_correlated = duplicit_correlated + nodes_without_preserve
+
+    return duplicit_correlated
 
 
 def get_correlated_descriptors(df, threshold, fig_location):
@@ -158,7 +124,7 @@ def get_correlated_descriptors(df, threshold, fig_location):
     return correlations
 
 
-def create_correlation_graphs(correlations, fig_location, trashold):
+def create_correlation_graphs(correlations, fig_location, threshold):
     MG = nx.MultiGraph()
     columns = correlations.columns
 
@@ -177,7 +143,7 @@ def create_correlation_graphs(correlations, fig_location, trashold):
         nx.draw(sg, with_labels=True, font_weight='bold', font_size=8, pos=nx.circular_layout(sg), ax=axes[i])
         logging.info(f'Subgraph {i}: {nodes}')
 
-    fig.suptitle(f'Strong correlations graph {trashold}', fontsize=16)
+    fig.suptitle(f'Strong correlations graph {threshold}', fontsize=16)
 
     plt.tight_layout()
     plt.show()
@@ -188,20 +154,44 @@ def create_correlation_graphs(correlations, fig_location, trashold):
     return subgraphs
 
 
-def check_correlated_column(df, trashhold=0.9, remove=False, graph_location='./plot/correlations_grapgs.jpeg',
-                            heatmap_location='./plot/correlations_heatmap.jpeg') -> pd.DataFrame:
-    correlations = get_correlated_descriptors(df, trashhold, heatmap_location)
-    graphs = create_correlation_graphs(correlations, graph_location, trashhold)
-    to_delete = get_correlated_descriptors_to_delete(graphs)
+def save_mask(df, mask_name, columns: [None, list] = None, rows: [None, list] = None, ):
+    if rows is None and columns is not None:
+        mask = (df == df) & (~df.columns.isin(columns))
+    elif rows is not None and columns is None:
+        mask = pd.DataFrame().reindex_like(df)
+        for col in df.columns:
+            mask[col] = rows
+    else:
+        raise KeyError('Columns or mask must be specified')
+
+    mask.to_csv(f'data/masks/{mask_name}.csv', index=False)
+
+
+def check_correlated_column(df, threshold=0.9, remove=False, preserve_columns=[],
+                            graph_location='./plot/correlations_grapgs_{}.jpeg',
+                            heatmap_location='./plot/correlations_heatmap_{}.jpeg') -> pd.DataFrame:
+    correlations = get_correlated_descriptors(df, threshold, heatmap_location.format(threshold))
+    graphs = create_correlation_graphs(correlations, graph_location.format(threshold), threshold)
+    duplicit_correlated = get_duplicit_correlated_descriptors(graphs, preserve_columns)
+
     if remove:
-        df.drop(to_delete, axis=1, inplace=True)
-    logging.info(f'Removing correlated columns: {to_delete}')
+        df.drop(duplicit_correlated, axis=1, inplace=True)
+        logging.info(f'Removing correlated columns: {duplicit_correlated}')
+    else:
+        save_mask(df, mask_name='correlations_' + str(threshold), columns=duplicit_correlated)
     return df
 
 
 def remove_duplicits(df: pd.DataFrame, subset, keep='first'):
-    # todo check phototox
     duplicits = df[df.duplicated(subset=subset, keep=keep)]
+    duplicits_smiles = duplicits['Smiles'].to_list()
+
+    for smile in duplicits_smiles:
+        phototox = df.loc[df["Smiles"] == smile, 'Phototoxic']
+        if phototox.all() != phototox.any():
+            logging.error(
+                f'There are two duplicit rows with same smiles, but diffrent phototox value. Removing one of them.'
+                f'Names: {df.loc[df["Smiles"] == smile, "Name"]}')
 
     logging.warning(f"Found duplicates:{duplicits[subset].to_list()} deleted.")
     df.drop_duplicates(subset=subset, keep=keep, inplace=True)
@@ -209,35 +199,67 @@ def remove_duplicits(df: pd.DataFrame, subset, keep='first'):
     return df
 
 
-def check_outliers(df, remove=False):
+def check_outliers(df, threshold=4.2, remove=False):
     numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
     df_numeric = df.select_dtypes(include=numerics)
 
-    outliers = df[~(np.abs(stats.zscore(df_numeric)) < 4.2).all(axis=1)]['Name'].unique()
-
+    outliers = df[~(np.abs(stats.zscore(df_numeric)) < threshold).all(axis=1)]['Name'].unique()
     logging.info(f'Outliners: {outliers}')
 
+    rows = ~df['Name'].isin(outliers)
+
     if remove:
-        df = df[~df['Name'].isin(outliers)]
+        df = df[rows]
         logging.info(f'Outliners {outliers} deleted.')
+    else:
+        save_mask(df, mask_name='outliers_' + str(threshold), rows=rows)
 
     return df
 
 
-def main():
-    input = 'data/chem_output/chem_populated.csv'
-    output = 'data/final/phototox.csv'
+def main(input_file='data/chem_output/chem_populated.csv', output_file='data/final/phototox.csv', correlation_threshold=0.95, outliers_threshold=4.2, preserve_columns=None,
+         remove=False):
+    if preserve_columns is None:
+        preserve_columns = []
 
-    df = load_data(input)
+    df = load_data(input_file)
     df = remove_useless_columns(df)
     df = set_proper_data_type(df)
 
-    df = check_correlated_column(df)
+    df = check_correlated_column(df, threshold=correlation_threshold, remove=remove, preserve_columns=preserve_columns)
     df = remove_duplicits(df, subset="Smiles", keep='first')
-    df = check_outliers(df)
+    df = check_outliers(df, threshold=outliers_threshold, remove=remove)
 
-    df.to_csv(output, index=False)
+    df.to_csv(output_file, index=False)
+
+
+def process_config(config_file='conf/cleaner.ini') -> dict:
+    """
+    Process input config and extract
+    :param config_file: config file name location
+    :return: confuguration
+    """
+    if not os.path.exists(config_file):
+        logging.warning(f'Config file {config_file} does not exist. Running with default setting.')
+        return dict()
+
+    config = configparser.ConfigParser()
+    config.read('conf/cleaner.ini')
+    default = config['DEFAULT']
+
+    method = default['method']
+    method_dict = {'mask': False, 'remove': True}
+    try:
+        method = method_dict[method]
+    except KeyError:
+        raise ValueError('Bad value in ini file. Method can be eather "mask" of "remove".')
+
+    return {'correlation_threshold': float(default['correlation_threshold']),
+            'outliers_threshold': float(default['outliers_threshold']),
+            'preserve_columns': default['preserve_columns'],
+            'remove': method}
 
 
 if __name__ == "__main__":
-    main()
+    args = process_config('conf/cleaner.ini')
+    main('data/chem_output/chem_populated.csv', 'data/final/phototox.csv', **args)
