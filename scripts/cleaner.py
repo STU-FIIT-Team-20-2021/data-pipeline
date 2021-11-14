@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+"""
+Clean input data. Deletes unuseful columns. Correlations columns and outliers are ether deleted or a mask is created.
+"""
+
+__author__ = "Katerina Muskova"
+__maintainer__ = "Katerina Muskova"
+
 import os
 import numpy as np
 import pandas as pd
@@ -12,11 +20,21 @@ logging.basicConfig()
 logging.getLogger().setLevel(logging.INFO)
 
 
-def load_data(csv_file_name):
-    return pd.read_csv(csv_file_name)
+def load_data(csv_file: str) -> pd.DataFrame:
+    """
+    Load data from csv ta pandas DataFrame
+    :param csv_file: csv file name
+    :return: loaded DataFrame
+    """
+    return pd.read_csv(csv_file)
 
 
-def set_proper_data_type(df):
+def set_proper_data_type(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Set data types to df columns.
+    :param df: input DataFrame
+    :return: df with changed types
+    """
     replace_dict = {'Low': False, 'High': True, 'Yes': True, 'No': False}
 
     for repl, val in replace_dict.items():
@@ -43,15 +61,26 @@ def set_proper_data_type(df):
     return df
 
 
-def unique_count(column):
+def unique_count(column: pd.Series) -> [str, int]:
+    """
+    Get number of unique values in Series
+    :param column: input Series
+    :return: columns name and number of unique values
+    """
     return column.name, len(column.unique())
 
 
-def remove_useless_columns(df):
-    # its only cathegory based on previous values
-    df.drop(columns={'ESOL Class', 'Ali Class', 'Silicos-IT class'}, inplace=True)
+def remove_useless_columns(df) -> pd.DataFrame:
+    """
+    Remove columns from DataFrame, that are duplicated from multiple sources or otherwise unuseful
+    :param df: input DataFrame
+    :return: reduced DataFrame
+    """
+
+    # categorical only
+    df.drop(columns=['ESOL Class', 'Ali Class', 'Silicos-IT class'], inplace=True)
     # only different unit
-    df.drop(columns={'ESOL Solubility (mol/l)', 'Ali Solubility (mol/l)', 'Silicos-IT Solubility (mol/l)'},
+    df.drop(columns=['ESOL Solubility (mol/l)', 'Ali Solubility (mol/l)', 'Silicos-IT Solubility (mol/l)'],
             inplace=True)
 
     # remove columns with one value only
@@ -78,11 +107,18 @@ def remove_useless_columns(df):
     return df
 
 
-def get_duplicit_correlated_descriptors(graphs, descriptors) -> list:
+def get_duplicit_correlated_descriptors(graphs: nx.MultiGraph, exclude) -> list:
+    """
+    Fnc extract corelated  descriptors (column names) from graphs. From each correlation group is excluded one item,
+    or if some items from exclude are in correlation, these items are excluded instead.
+    :param graphs: input graphs
+    :param exclude: list of descriptors to exclude from final result
+    :return: list of correlated descriptors without excluded
+    """
     duplicit_correlated = []
     for subgraph in graphs:
         nodes = [node for node in subgraph.nodes]
-        nodes_without_preserve = [node for node in nodes if node not in descriptors]
+        nodes_without_preserve = [node for node in nodes if node not in exclude]
 
         if len(nodes) == len(nodes_without_preserve):
             duplicit_correlated = duplicit_correlated + nodes[:-1]
@@ -92,19 +128,13 @@ def get_duplicit_correlated_descriptors(graphs, descriptors) -> list:
     return duplicit_correlated
 
 
-def get_correlated_descriptors(df, threshold, fig_location):
-    correlations = df.corr().abs()
-
-    # half of table only
-    mask = np.triu(np.ones_like(correlations, dtype=bool))
-
-    # high correlations only, other values nan
-    correlations.mask(mask, inplace=True)
-    correlations = correlations.applymap(lambda x: x if x > threshold else np.nan)
-    correlations = correlations.loc[~(correlations.isna()).all(axis=1)]
-    correlations = correlations.loc[:, ~(correlations.isna()).all(axis=0)]
-
-    # plot
+def plot_correlation_heatmap(correlations: pd.DataFrame, fig_location: str, threshold: int):
+    """
+    Plot heatmap of correlated descriptors
+    :param correlations:input DataFrame with correlations
+    :param fig_location: path to store plot
+    :param threshold: used threshold to generate correlations
+    """
     fig, ax = plt.subplots(1, 1, figsize=(8.27, 8.27))
 
     img = ax.imshow(correlations, cmap="gist_heat", extent=[-1, 1, -1, 1])
@@ -133,10 +163,38 @@ def get_correlated_descriptors(df, threshold, fig_location):
 
     fig.savefig(fig_location)
 
+
+def get_correlated_descriptors(df: pd.DataFrame, threshold: int, fig_location: str):
+    """
+    This function creates correlation between descriptors
+    :param df: input DataFrame
+    :param threshold: threshold for minimal correlation
+    :param fig_location: location of correlation figure
+    :return: created correlations
+    """
+    correlations = df.corr().abs()
+
+    # half of table only
+    mask = np.triu(np.ones_like(correlations, dtype=bool))
+
+    # high correlations only, other values nan
+    correlations.mask(mask, inplace=True)
+    correlations = correlations.applymap(lambda x: x if x > threshold else np.nan)
+    correlations = correlations.loc[~(correlations.isna()).all(axis=1)]
+    correlations = correlations.loc[:, ~(correlations.isna()).all(axis=0)]
+
+    plot_correlation_heatmap(correlations, fig_location, threshold)
     return correlations
 
 
 def create_correlation_graphs(correlations, fig_location, threshold):
+    """
+
+    :param correlations:
+    :param fig_location:
+    :param threshold:
+    :return:
+    """
     MG = nx.MultiGraph()
     columns = correlations.columns
 
@@ -166,7 +224,15 @@ def create_correlation_graphs(correlations, fig_location, threshold):
     return subgraphs
 
 
-def save_mask(df, mask_name, columns: [None, list] = None, rows: [None, list] = None, data_dir='../data'):
+def create_mask(df, mask_name, columns: [None, list] = None, rows: [None, list] = None, data_dir='../data'):
+    """
+    Creates mask from columns or rows.
+    :param df: input Dataframe
+    :param mask_name: mask name
+    :param columns: input columns to mask
+    :param rows: input rows to mask
+    :param data_dir: dir to store mask
+    """
     if rows is None and columns is not None:
         mask = (df == df) & (~df.columns.isin(columns))
     elif rows is not None and columns is None:
@@ -182,6 +248,16 @@ def save_mask(df, mask_name, columns: [None, list] = None, rows: [None, list] = 
 
 def check_correlated_column(df, threshold=0.9, remove=False, preserve_columns=[], plot_dir='../plot',
                             data_dir='../data') -> pd.DataFrame:
+    """
+    Check weather some columns are not correlated over given threshold. If yes, remove them or create mask.
+    :param df: input DataFrame
+    :param threshold: correlation threshold
+    :param remove: if True,remove these columns, otherwise make mask
+    :param preserve_columns: columns, taht are alwais perseved
+    :param plot_dir: dir to save generated correlation plot
+    :param data_dir:dir to store masks
+    :return: output DataFrame
+    """
     graph_location = os.path.join(plot_dir, f'correlations_grapgs_{threshold}.jpeg')
     heatmap_location = os.path.join(plot_dir, f'correlations_heatmap_{threshold}.jpeg')
 
@@ -193,11 +269,18 @@ def check_correlated_column(df, threshold=0.9, remove=False, preserve_columns=[]
         df.drop(duplicit_correlated, axis=1, inplace=True)
         logging.info(f'Removing correlated columns: {duplicit_correlated}')
     else:
-        save_mask(df, mask_name='correlations_' + str(threshold), columns=duplicit_correlated, data_dir=data_dir)
+        create_mask(df, mask_name='correlations_' + str(threshold), columns=duplicit_correlated, data_dir=data_dir)
     return df
 
 
 def remove_duplicits(df: pd.DataFrame, subset, keep='first'):
+    """
+    Removes duplicit rows
+    :param df: nput DataFrame
+    :param subset: columns where to check duplicity
+    :param keep: keep argument
+    :return: output DataFrame
+    """
     duplicits = df[df.duplicated(subset=subset, keep=keep)]
     duplicits_smiles = duplicits['Smiles'].to_list()
 
@@ -215,6 +298,13 @@ def remove_duplicits(df: pd.DataFrame, subset, keep='first'):
 
 
 def check_outliers(df, threshold=4.2, remove=False):
+    """
+    Check weather some outliners over given threshold (standart deviation). If yes, remove them, otherwise create mask.
+    :param df: input DtaFrame
+    :param threshold: standart deviation
+    :param remove: if True, remove these columns, otherwise make mask
+    :return: output DataFrame
+    """
     numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
     df_numeric = df.select_dtypes(include=numerics)
 
@@ -227,7 +317,7 @@ def check_outliers(df, threshold=4.2, remove=False):
         df = df[rows]
         logging.info(f'Outliners {outliers} deleted.')
     else:
-        save_mask(df, mask_name='outliers_' + str(threshold), rows=rows)
+        create_mask(df, mask_name='outliers_' + str(threshold), rows=rows)
 
     return df
 
@@ -257,7 +347,7 @@ def process_config(config_file='../conf/cleaner.ini') -> dict:
     """
     Process input config and extract
     :param config_file: config file name location
-    :return: confuguration
+    :return: configuration
     """
     if not os.path.exists(config_file):
         logging.warning(f'Config file {config_file} does not exist. Running with default setting.')
@@ -286,5 +376,5 @@ if __name__ == "__main__":
 
     args = process_config(os.path.join(project_dir, 'conf/cleaner.ini'))
     input_data = os.path.join(project_dir, 'data/chem_output/chem_populated.csv')
-    output_data = os.path.join(project_dir, 'data/chem_output/phototox.csv')
+    output_data = os.path.join(project_dir, 'data/final/phototox.csv')
     main(input_data, output_data, project_dir=project_dir, **args)
