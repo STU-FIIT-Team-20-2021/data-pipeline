@@ -217,7 +217,7 @@ def create_correlation_graphs(correlations: pd.DataFrame, fig_location: str,
 
 
 def save_mask(df: pd.DataFrame, mask_name: str, columns: [None, list] = None,
-              rows: [None, list] = None, data_dir: str = "../data") -> None:
+              rows: [None, list] = None, data_dir: str = "data") -> None:
     """
     Save mask
     :param df: data.
@@ -241,8 +241,8 @@ def save_mask(df: pd.DataFrame, mask_name: str, columns: [None, list] = None,
 
 
 def check_correlated_column(df: pd.DataFrame, threshold: float = 0.9, remove: bool = False,
-                            preserve_columns: list = None, plot_dir: str = "../plot",
-                            data_dir: str = "../data") -> pd.DataFrame:
+                            preserve_columns: list = None, plot_dir: str = "plot",
+                            data_dir: str = "data") -> pd.DataFrame:
     """
     Check whether some columns are not correlated over given threshold.
     If yes, remove them or create mask.
@@ -323,8 +323,8 @@ def check_outliers(df: pd.DataFrame, threshold: float = 4.2, remove: bool = Fals
     return df
 
 
-def main(input_file: str = "../data/chem_output/chem_populated.csv",
-         output_file: str = "../data/final/phototox.csv", project_directory: str = "../",
+def main(input_file: str = "data/chem_output/chem_populated.csv",
+         output_file: str = "data/final/phototox.csv", project_directory: str = ".",
          correlation_threshold: float = 0.95, outliers_threshold: float = 4.2,
          preserve_columns: list = None, remove: bool = False) -> None:
     """
@@ -357,7 +357,7 @@ def main(input_file: str = "../data/chem_output/chem_populated.csv",
     df.to_csv(output_file, index=False)
 
 
-def process_config(config_file: str = "../conf/cleaner.ini") -> dict:
+def process_config(config_file: str = "conf/cleaner.ini") -> dict:
     """
     Process input config and extract
     :param config_file: config file name location
