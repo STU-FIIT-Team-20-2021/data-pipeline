@@ -1,41 +1,51 @@
-\hypertarget{cleaner_8py}{}\doxysection{cleaner.\+py File Reference}
-\label{cleaner_8py}\index{cleaner.py@{cleaner.py}}
+\hypertarget{cleaner_8py}{}\doxysection{scripts/cleaner.py File Reference}
+\label{cleaner_8py}\index{scripts/cleaner.py@{scripts/cleaner.py}}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespacecleaner}{cleaner}}
+ \mbox{\hyperlink{namespacescripts_1_1cleaner}{scripts.\+cleaner}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-def \mbox{\hyperlink{namespacecleaner_ac31232c151acc97ea1d0be345ded78d9}{cleaner.\+load\+\_\+data}} (csv\+\_\+file\+\_\+name)
+pd.\+Data\+Frame \mbox{\hyperlink{namespacescripts_1_1cleaner_a408aba2a0072aa3c246e5e3c507efefe}{scripts.\+cleaner.\+load\+\_\+data}} (str csv\+\_\+file)
 \item 
-def \mbox{\hyperlink{namespacecleaner_adf803e7dbe31d7074da3f80156e605bf}{cleaner.\+set\+\_\+proper\+\_\+data\+\_\+type}} (df)
+pd.\+Data\+Frame \mbox{\hyperlink{namespacescripts_1_1cleaner_a5829635fea3da2e84f750578e972ad04}{scripts.\+cleaner.\+set\+\_\+proper\+\_\+data\+\_\+type}} (pd.\+Data\+Frame df)
 \item 
-def \mbox{\hyperlink{namespacecleaner_aa809f11f801a37afc1a8b196db179e81}{cleaner.\+unique\+\_\+count}} (column)
+\mbox{[}str, int\mbox{]} \mbox{\hyperlink{namespacescripts_1_1cleaner_a9db5345496b081bd13be845ac8d37a52}{scripts.\+cleaner.\+unique\+\_\+count}} (pd.\+Series column)
 \item 
-def \mbox{\hyperlink{namespacecleaner_acb1f774b79353e0c57146156f289075f}{cleaner.\+remove\+\_\+useless\+\_\+columns}} (df)
+pd.\+Data\+Frame \mbox{\hyperlink{namespacescripts_1_1cleaner_a4e75fb866f46d9eb84aec4255e3b6be2}{scripts.\+cleaner.\+remove\+\_\+useless\+\_\+columns}} (df)
 \item 
-list \mbox{\hyperlink{namespacecleaner_ab63851bfa578936553825d2ab38d9a17}{cleaner.\+get\+\_\+duplicit\+\_\+correlated\+\_\+descriptors}} (graphs, descriptors)
+list \mbox{\hyperlink{namespacescripts_1_1cleaner_ad847c48a6d22ed4b4ff18b5fc5749f60}{scripts.\+cleaner.\+get\+\_\+duplicit\+\_\+correlated\+\_\+descriptors}} (nx.\+Multi\+Graph graphs, exclude)
 \item 
-def \mbox{\hyperlink{namespacecleaner_af4b2c7950601ca88518429da4e265e39}{cleaner.\+get\+\_\+correlated\+\_\+descriptors}} (df, threshold, fig\+\_\+location)
+def \mbox{\hyperlink{namespacescripts_1_1cleaner_a20cc9b5e1ac87291f0f70a77bd9b3352}{scripts.\+cleaner.\+plot\+\_\+correlation\+\_\+heatmap}} (pd.\+Data\+Frame correlations, str fig\+\_\+location, int threshold)
 \item 
-def \mbox{\hyperlink{namespacecleaner_a0ed57272be0f93fd03bd31d0e21ef0d3}{cleaner.\+create\+\_\+correlation\+\_\+graphs}} (correlations, fig\+\_\+location, threshold)
+def \mbox{\hyperlink{namespacescripts_1_1cleaner_ae5e76e6ece00a3e1b4cd386300164fa1}{scripts.\+cleaner.\+get\+\_\+correlated\+\_\+descriptors}} (pd.\+Data\+Frame df, int threshold, str fig\+\_\+location)
 \item 
-def \mbox{\hyperlink{namespacecleaner_a83bcbaaa34bec4417b9190b3b6cf2f18}{cleaner.\+save\+\_\+mask}} (df, mask\+\_\+name, \mbox{[}None, list\mbox{]} columns=None, \mbox{[}None, list\mbox{]} rows=None)
+def \mbox{\hyperlink{namespacescripts_1_1cleaner_a0e7bd31838c5f4ad4d80fa2e2832f700}{scripts.\+cleaner.\+create\+\_\+correlation\+\_\+graphs}} (correlations, fig\+\_\+location, threshold)
 \item 
-pd.\+Data\+Frame \mbox{\hyperlink{namespacecleaner_aab9f3364e2606270cfa1f52de7e59074}{cleaner.\+check\+\_\+correlated\+\_\+column}} (df, threshold=0.\+9, remove=False, preserve\+\_\+columns=\mbox{[}$\,$\mbox{]}, graph\+\_\+location=\textquotesingle{}./plot/correlations\+\_\+grapgs\+\_\+\{\}.jpeg\textquotesingle{}, heatmap\+\_\+location=\textquotesingle{}./plot/correlations\+\_\+heatmap\+\_\+\{\}.jpeg\textquotesingle{})
+def \mbox{\hyperlink{namespacescripts_1_1cleaner_ad33f94899640b081b1d434f09dc358f9}{scripts.\+cleaner.\+create\+\_\+mask}} (df, mask\+\_\+name, \mbox{[}None, list\mbox{]} columns=None, \mbox{[}None, list\mbox{]} rows=None, data\+\_\+dir=\textquotesingle{}../data\textquotesingle{})
 \item 
-def \mbox{\hyperlink{namespacecleaner_a4a5550bd6b2d44576d1890e8f942b4bc}{cleaner.\+remove\+\_\+duplicits}} (pd.\+Data\+Frame df, subset, keep=\textquotesingle{}first\textquotesingle{})
+pd.\+Data\+Frame \mbox{\hyperlink{namespacescripts_1_1cleaner_af8445153fac777dccb82f15a2e37767d}{scripts.\+cleaner.\+check\+\_\+correlated\+\_\+column}} (df, threshold=0.\+9, remove=False, preserve\+\_\+columns=\mbox{[}$\,$\mbox{]}, plot\+\_\+dir=\textquotesingle{}../plot\textquotesingle{}, data\+\_\+dir=\textquotesingle{}../data\textquotesingle{})
 \item 
-def \mbox{\hyperlink{namespacecleaner_ae1f36405a6d7a063d11627b3687f2b5f}{cleaner.\+check\+\_\+outliers}} (df, threshold=4.\+2, remove=False)
+def \mbox{\hyperlink{namespacescripts_1_1cleaner_aa4f96f44f991cfa6799846feb76becd4}{scripts.\+cleaner.\+remove\+\_\+duplicits}} (pd.\+Data\+Frame df, subset, keep=\textquotesingle{}first\textquotesingle{})
 \item 
-def \mbox{\hyperlink{namespacecleaner_ac7d29651609d3f447936863a4ac0642d}{cleaner.\+main}} (input\+\_\+file, output\+\_\+file, correlation\+\_\+threshold=0.\+95, outliers\+\_\+threshold=4.\+2, preserve\+\_\+columns=None, remove=False)
+def \mbox{\hyperlink{namespacescripts_1_1cleaner_a3b154f4b50250ec9df207396ba44cd59}{scripts.\+cleaner.\+check\+\_\+outliers}} (df, threshold=4.\+2, remove=False)
 \item 
-dict \mbox{\hyperlink{namespacecleaner_aa512c1a43cd259241d74d61c6947de35}{cleaner.\+process\+\_\+config}} (config\+\_\+file=\textquotesingle{}conf/cleaner.\+ini\textquotesingle{})
+def \mbox{\hyperlink{namespacescripts_1_1cleaner_ab667996529a1de823f5f59062f7d5f7f}{scripts.\+cleaner.\+main}} (input\+\_\+file=\textquotesingle{}../data/chem\+\_\+output/chem\+\_\+populated.\+csv\textquotesingle{}, output\+\_\+file=\textquotesingle{}../data/final/phototox.\+csv\textquotesingle{}, project\+\_\+dir=\textquotesingle{}../\textquotesingle{}, correlation\+\_\+threshold=0.\+95, outliers\+\_\+threshold=4.\+2, preserve\+\_\+columns=None, remove=False)
+\item 
+dict \mbox{\hyperlink{namespacescripts_1_1cleaner_ab037fa0be6e3011d3d304381af1acec2}{scripts.\+cleaner.\+process\+\_\+config}} (config\+\_\+file=\textquotesingle{}../conf/cleaner.\+ini\textquotesingle{})
 \end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-dict \mbox{\hyperlink{namespacecleaner_a5ca7da5f5cf0604427f3db740c584ac7}{cleaner.\+args}} = process\+\_\+config(\textquotesingle{}conf/cleaner.\+ini\textquotesingle{})
+\mbox{\hyperlink{namespacescripts_1_1cleaner_a6ae4475dbe28156196f7ce020c11631f}{scripts.\+cleaner.\+script\+\_\+dir}} = os.\+path.\+dirname(os.\+path.\+realpath(\+\_\+\+\_\+file\+\_\+\+\_\+))
+\item 
+\mbox{\hyperlink{namespacescripts_1_1cleaner_a00f88882bd6e978b9e0390bedff93a47}{scripts.\+cleaner.\+project\+\_\+dir}} = os.\+path.\+dirname(script\+\_\+dir)
+\item 
+dict \mbox{\hyperlink{namespacescripts_1_1cleaner_a2ec65131c01d34455d6b3f36b42e8b8a}{scripts.\+cleaner.\+args}} = process\+\_\+config(os.\+path.\+join(project\+\_\+dir, \textquotesingle{}conf/cleaner.\+ini\textquotesingle{}))
+\item 
+\mbox{\hyperlink{namespacescripts_1_1cleaner_ae6e27288c17bd8faa15fcb55d96b7728}{scripts.\+cleaner.\+input\+\_\+data}} = os.\+path.\+join(project\+\_\+dir, \textquotesingle{}data/chem\+\_\+output/chem\+\_\+populated.\+csv\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespacescripts_1_1cleaner_acc7b7f9b669de50897067bbeacec68c9}{scripts.\+cleaner.\+output\+\_\+data}} = os.\+path.\+join(project\+\_\+dir, \textquotesingle{}data/chem\+\_\+output/phototox.\+csv\textquotesingle{})
 \end{DoxyCompactItemize}

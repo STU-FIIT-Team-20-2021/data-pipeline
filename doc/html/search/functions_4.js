@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['load_5fdata_79',['load_data',['../namespacecleaner.html#ac31232c151acc97ea1d0be345ded78d9',1,'cleaner']]]
+  ['load_5fdata_90',['load_data',['../namespacescripts_1_1cleaner.html#a408aba2a0072aa3c246e5e3c507efefe',1,'scripts::cleaner']]]
 ];

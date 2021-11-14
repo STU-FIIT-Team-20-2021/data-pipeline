@@ -1,5 +1,5 @@
 var swisstarget_8py =
 [
-    [ "crawl", "swisstarget_8py.html#a006475b04fc7aa6e2b734cb97fabe1d8", null ],
-    [ "is_file_downloaded", "swisstarget_8py.html#af2367dce64d5fd947c519749e816d735", null ]
+    [ "crawl", "swisstarget_8py.html#a31c711059ea12e64886934f7df47012b", null ],
+    [ "is_file_downloaded", "swisstarget_8py.html#ab415f8d8988495b85fb2a3f5ad7e8a34", null ]
 ];
