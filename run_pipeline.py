@@ -1,13 +1,16 @@
-from scripts import populate_chem, cleaner, merger
-import scripts.crawlers.crawler_orchestrator as crawler
+"""Manages the execution of the pipeline."""
 import argparse
 import shutil
 
+from scripts import populate_chem, cleaner, merger
+import scripts.crawlers.crawler_orchestrator as crawler
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('-inputfile', type=str, help="Input file location.")
-    parser.add_argument('-outputfile', type=str, help="Output file destination.")
-    parser.add_argument('-noscrape', action='store_false', help="Skip scraping/crawler step.")
+    parser.add_argument("-inputfile", type=str, help="Input file location.")
+    parser.add_argument("-outputfile", type=str, help="Output file destination.")
+    parser.add_argument("-noscrape", action="store_false", help="Skip scraping/crawler step.")
     args = parser.parse_args()
 
     if not args.noscrape:
