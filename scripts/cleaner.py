@@ -1,6 +1,7 @@
+import os
 import numpy as np
 import pandas as pd
-#import seaborn as sns
+# import seaborn as sns
 from scipy import stats
 import matplotlib.pyplot as plt
 import configparser
@@ -11,9 +12,6 @@ import networkx as nx
 logging.basicConfig()
 logging.getLogger().setLevel(logging.INFO)
 
-
-# poands discribe
-# by model analysis vuci phototox
 
 def load_data(csv_file_name):
     return pd.read_csv(csv_file_name)
@@ -108,7 +106,7 @@ def get_correlated_descriptors(df, threshold, fig_location):
     correlations = correlations.loc[:, ~(correlations.isna()).all(axis=0)]
 
     fig, ax = plt.subplots(figsize=(8.27, 8.27))
-    #sns.heatmap(correlations, cmap='gist_heat', square=True, ax=ax)
+    # sns.heatmap(correlations, cmap='gist_heat', square=True, ax=ax)
 
     fig.suptitle(f'Strong correlations values ({threshold})', fontsize=16)
 
@@ -151,7 +149,7 @@ def create_correlation_graphs(correlations, fig_location, threshold):
     return subgraphs
 
 
-def save_mask(df, mask_name, columns: [None, list] = None, rows: [None, list] = None, ):
+def save_mask(df, mask_name, columns: [None, list] = None, rows: [None, list] = None, data_dir='../data'):
     if rows is None and columns is not None:
         mask = (df == df) & (~df.columns.isin(columns))
     elif rows is not None and columns is None:
@@ -161,12 +159,15 @@ def save_mask(df, mask_name, columns: [None, list] = None, rows: [None, list] = 
     else:
         raise KeyError('Columns or mask must be specified')
 
-    mask.to_csv(f'data/masks/{mask_name}.csv', index=False)
+    mask_path = os.path.join(data_dir, 'masks/{mask_name}.csv')
+    mask.to_csv(mask_path, index=False)
 
 
-def check_correlated_column(df, threshold=0.9, remove=False, preserve_columns=[],
-                            graph_location='./plot/correlations_grapgs_{}.jpeg',
-                            heatmap_location='./plot/correlations_heatmap_{}.jpeg') -> pd.DataFrame:
+def check_correlated_column(df, threshold=0.9, remove=False, preserve_columns=[], plot_dir='../plot',
+                            data_dir='../data') -> pd.DataFrame:
+    graph_location = os.path.join(plot_dir, f'correlations_grapgs_{threshold}.jpeg')
+    heatmap_location = os.path.join(plot_dir, f'correlations_heatmap_{threshold}.jpeg')
+
     correlations = get_correlated_descriptors(df, threshold, heatmap_location.format(threshold))
     graphs = create_correlation_graphs(correlations, graph_location.format(threshold), threshold)
     duplicit_correlated = get_duplicit_correlated_descriptors(graphs, preserve_columns)
@@ -175,7 +176,7 @@ def check_correlated_column(df, threshold=0.9, remove=False, preserve_columns=[]
         df.drop(duplicit_correlated, axis=1, inplace=True)
         logging.info(f'Removing correlated columns: {duplicit_correlated}')
     else:
-        save_mask(df, mask_name='correlations_' + str(threshold), columns=duplicit_correlated)
+        save_mask(df, mask_name='correlations_' + str(threshold), columns=duplicit_correlated, data_dir=data_dir)
     return df
 
 
@@ -214,7 +215,8 @@ def check_outliers(df, threshold=4.2, remove=False):
     return df
 
 
-def main(input_file='data/chem_output/chem_populated.csv', output_file='data/final/phototox.csv', correlation_threshold=0.95, outliers_threshold=4.2, preserve_columns=None,
+def main(input_file='../data/chem_output/chem_populated.csv', output_file='../data/final/phototox.csv',
+         project_dir='../', correlation_threshold=0.95, outliers_threshold=4.2, preserve_columns=None,
          remove=False):
     if preserve_columns is None:
         preserve_columns = []
@@ -223,14 +225,18 @@ def main(input_file='data/chem_output/chem_populated.csv', output_file='data/fin
     df = remove_useless_columns(df)
     df = set_proper_data_type(df)
 
-    df = check_correlated_column(df, threshold=correlation_threshold, remove=remove, preserve_columns=preserve_columns)
+    plot_dir = os.path.join(project_dir, 'plot')
+    data_dir = os.path.join(project_dir, 'data')
+
+    df = check_correlated_column(df, threshold=correlation_threshold, remove=remove, preserve_columns=preserve_columns,
+                                 plot_dir=plot_dir, data_dir=data_dir)
     df = remove_duplicits(df, subset="Smiles", keep='first')
     df = check_outliers(df, threshold=outliers_threshold, remove=remove)
 
     df.to_csv(output_file, index=False)
 
 
-def process_config(config_file='conf/cleaner.ini') -> dict:
+def process_config(config_file='../conf/cleaner.ini') -> dict:
     """
     Process input config and extract
     :param config_file: config file name location
@@ -241,7 +247,7 @@ def process_config(config_file='conf/cleaner.ini') -> dict:
         return dict()
 
     config = configparser.ConfigParser()
-    config.read('conf/cleaner.ini')
+    config.read(config_file)
     default = config['DEFAULT']
 
     method = default['method']
@@ -258,5 +264,10 @@ def process_config(config_file='conf/cleaner.ini') -> dict:
 
 
 if __name__ == "__main__":
-    args = process_config('../conf/cleaner.ini')
-    main('../data/chem_output/chem_populated.csv', 'data/final/phototox.csv', **args)
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    project_dir = os.path.dirname(script_dir)
+
+    args = process_config(os.path.join(project_dir, 'conf/cleaner.ini'))
+    input_data = os.path.join(project_dir, 'data/chem_output/chem_populated.csv')
+    output_data = os.path.join(project_dir, 'data/chem_output/phototox.csv')
+    main(input_data, output_data, project_dir=project_dir, **args)
