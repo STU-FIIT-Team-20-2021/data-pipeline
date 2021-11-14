@@ -246,18 +246,11 @@ def create_mask(df, mask_name, columns: [None, list] = None, rows: [None, list] 
     mask.to_csv(mask_path, index=False)
 
 
-def check_correlated_column(df, threshold=0.9, remove=False, preserve_columns=[], plot_dir='../plot',
-                            data_dir='../data') -> pd.DataFrame:
-    """
-    Check weather some columns are not correlated over given threshold. If yes, remove them or create mask.
-    :param df: input DataFrame
-    :param threshold: correlation threshold
-    :param remove: if True,remove these columns, otherwise make mask
-    :param preserve_columns: columns, taht are alwais perseved
-    :param plot_dir: dir to save generated correlation plot
-    :param data_dir:dir to store masks
-    :return: output DataFrame
-    """
+def check_correlated_column(df, threshold=0.9, remove=False, preserve_columns=None, plot_dir='plot',
+                            data_dir='data') -> pd.DataFrame:
+    if preserve_columns is None:
+        preserve_columns = []
+
     graph_location = os.path.join(plot_dir, f'correlations_grapgs_{threshold}.jpeg')
     heatmap_location = os.path.join(plot_dir, f'correlations_heatmap_{threshold}.jpeg')
 
@@ -322,8 +315,8 @@ def check_outliers(df, threshold=4.2, remove=False):
     return df
 
 
-def main(input_file='../data/chem_output/chem_populated.csv', output_file='../data/final/phototox.csv',
-         project_dir='../', correlation_threshold=0.95, outliers_threshold=4.2, preserve_columns=None,
+def main(input_file='data/chem_output/chem_populated.csv', output_file='data/final/phototox.csv',
+         project_dir='.', correlation_threshold=0.95, outliers_threshold=4.2, preserve_columns=None,
          remove=False):
     if preserve_columns is None:
         preserve_columns = []
@@ -343,7 +336,7 @@ def main(input_file='../data/chem_output/chem_populated.csv', output_file='../da
     df.to_csv(output_file, index=False)
 
 
-def process_config(config_file='../conf/cleaner.ini') -> dict:
+def process_config(config_file='conf/cleaner.ini') -> dict:
     """
     Process input config and extract
     :param config_file: config file name location
