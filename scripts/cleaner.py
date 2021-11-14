@@ -1,7 +1,6 @@
 import os
 import numpy as np
 import pandas as pd
-# import seaborn as sns
 from scipy import stats
 import matplotlib.pyplot as plt
 import configparser
@@ -105,8 +104,26 @@ def get_correlated_descriptors(df, threshold, fig_location):
     correlations = correlations.loc[~(correlations.isna()).all(axis=1)]
     correlations = correlations.loc[:, ~(correlations.isna()).all(axis=0)]
 
-    fig, ax = plt.subplots(figsize=(8.27, 8.27))
-    # sns.heatmap(correlations, cmap='gist_heat', square=True, ax=ax)
+    # plot
+    fig, ax = plt.subplots(1, 1, figsize=(8.27, 8.27))
+
+    img = ax.imshow(correlations, cmap="gist_heat", extent=[-1, 1, -1, 1])
+    fig.colorbar(img)
+
+    tick_len = (1 / (len(correlations.columns)))
+    ticks = [(i * tick_len + tick_len / 2) * 2 - 1 for i in range(len(correlations.columns))]
+
+    ax.set_xticks(ticks)
+    ax.set_yticks(ticks)
+
+    ax.set_xticklabels(correlations.columns.to_list())
+    ax.set_yticklabels(correlations.index.to_list()[::-1])
+    ax.tick_params(axis='x', labelrotation=90)
+
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    ax.spines['left'].set_visible(False)
 
     fig.suptitle(f'Strong correlations values ({threshold})', fontsize=16)
 
@@ -159,7 +176,7 @@ def save_mask(df, mask_name, columns: [None, list] = None, rows: [None, list] = 
     else:
         raise KeyError('Columns or mask must be specified')
 
-    mask_path = os.path.join(data_dir, 'masks/{mask_name}.csv')
+    mask_path = os.path.join(data_dir, f'masks/{mask_name}.csv')
     mask.to_csv(mask_path, index=False)
 
 
