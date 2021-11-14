@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.10.10)  13 NOV 2021 18:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.10.10)  14 NOV 2021 11:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -853,7 +853,9 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 8.99994pt on input line 169.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 6.29996pt on input line 169.
- [1] [2]
+ [1] [2] [3] [4
+
+]
 Package hyperref Info: Option `pageanchor' set `true' on input line 171.
 
 Chapter 1.
@@ -872,16 +874,15 @@ LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 (Font)              scaled to size 6.29996pt on input line 174.
 (./index.tex
-LaTeX Font Info:    Trying to load font information for TS1+phv on input line 1
+LaTeX Font Info:    Trying to load font information for TS1+phv on input line 5
 .
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1phv.fd
 File: ts1phv.fd 2001/06/04 scalable font definitions for TS1/phv.
 )
 LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
-(Font)              scaled to size 8.99994pt on input line 1.
+(Font)              scaled to size 8.99994pt on input line 5.
 )
 [1
-
 
 ] [2
 
@@ -906,117 +907,170 @@ Chapter 5.
 
 ]
 Chapter 6.
-(./namespacecleaner.tex
+(./namespacerun__pipeline.tex
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 10.79993pt on input line 3.
-
-Underfull \hbox (badness 10000) in paragraph at lines 28--30
-[]\T1/phv/m/n/10 def [] (input[]_[]file, output[]_[]file, correlation[]_[]thres
-hold=0.[]95, outliers[]_[]threshold=4.[]2, preserve[]_[]
- []
-
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 7.19995pt on input line 44.
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 44
+(Font)              scaled to size 7.19995pt on input line 25.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 25
 .
+
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-)
-LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 44.
-LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 44.
-LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 4
-4.
+) [11])
+(./namespacescripts.tex) (./namespacescripts_1_1cleaner.tex
+Underfull \hbox (badness 10000) in paragraph at lines 30--32
+[]\T1/phv/m/n/10 def [] (input[]_[]file=\TS1/phv/m/n/10 '\T1/phv/m/n/10 ../data
+/chem[]_[]output/chem[]_[]populated.[]csv\TS1/phv/m/n/10 '\T1/phv/m/n/10 , outp
+ut[]_[]file=\TS1/phv/m/n/10 '\T1/phv/m/n/10 ../data/final/phototox.[]
+ []
 
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
+
+Underfull \hbox (badness 1917) in paragraph at lines 30--32
+\T1/phv/m/n/10 csv\TS1/phv/m/n/10 '\T1/phv/m/n/10 , []=\TS1/phv/m/n/10 '\T1/phv
+/m/n/10 ../\TS1/phv/m/n/10 '\T1/phv/m/n/10 , correlation[]_[]threshold=0.[]95, 
+outliers[]_[]threshold=4.[]2, preserve[]_[]columns=None, re-
+ []
+
+
+Overfull \hbox (106.35625pt too wide) in paragraph at lines 50--50
+[]\T1/pcr/m/n/8 Clean input data. Deletes unuseful columns. Correlations column
+s and outliers are ether deleted or a mask is created. 
+ []
+
+[12]
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 59.
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 59.
+LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 5
+9.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
 )
 LaTeX Font Info:    Font shape `TS1/pcr/m/it' in size <8> not available
-(Font)              Font shape `TS1/pcr/m/sl' tried instead on input line 44.
- [11] [12])
-(./namespacecrawler__orchestrator.tex) (./namespacedependencies.tex [13])
-(./namespacedependencies_1_1pubchem.tex)
-(./namespacedependencies_1_1swissadme.tex)
-(./namespacedependencies_1_1swisstarget.tex [14]) (./namespacemerger.tex)
-(./namespacepipe__handler.tex) (./namespacepopulate__chem.tex)
-(./namespacerun__pipeline.tex [15]) [16]
+(Font)              Font shape `TS1/pcr/m/sl' tried instead on input line 59.
+
+Overfull \hbox (39.1562pt too wide) in paragraph at lines 61--61
+[]\T1/pcr/m/n/8 Check weather some columns are not correlated over given thresh
+old. If yes, remove them or create mask. 
+ []
+
+
+Overfull \hbox (96.75624pt too wide) in paragraph at lines 76--76
+[]\T1/pcr/m/n/8 Check weather some outliners over given threshold (standart dev
+iation). If yes, remove them, otherwise create mask. 
+ []
+
+[13]
+Overfull \hbox (82.35623pt too wide) in paragraph at lines 124--124
+[]\T1/pcr/m/n/8 Fnc extract corelated  descriptors (column names) from graphs. 
+From each correlation group is excluded one item, 
+ []
+
+[14] [15] [16]) (./namespacescripts_1_1crawlers.tex)
+(./namespacescripts_1_1crawlers_1_1crawler__orchestrator.tex [17])
+(./namespacescripts_1_1crawlers_1_1dependencies.tex)
+(./namespacescripts_1_1crawlers_1_1dependencies_1_1pubchem.tex)
+(./namespacescripts_1_1crawlers_1_1dependencies_1_1swissadme.tex [18])
+(./namespacescripts_1_1crawlers_1_1dependencies_1_1swisstarget.tex)
+(./namespacescripts_1_1merger.tex) (./namespacescripts_1_1pipe__handler.tex
+[19]) (./namespacescripts_1_1populate__chem.tex) [20]
 Chapter 7.
-(./classpipe__handler_1_1_ignore_broken_pipe.tex <./classpipe__handler_1_1_igno
-re_broken_pipe__inherit__graph.pdf
+(./classscripts_1_1pipe__handler_1_1_ignore_broken_pipe.tex <./classscripts_1_1
+pipe__handler_1_1_ignore_broken_pipe__inherit__graph.pdf
 
-pdfTeX warning: pdflatex (file ./classpipe__handler_1_1_ignore_broken_pipe__inh
-erit__graph.pdf): PDF inclusion: multiple pdfs with page group included in a si
-ngle page
+pdfTeX warning: pdflatex (file ./classscripts_1_1pipe__handler_1_1_ignore_broke
+n_pipe__inherit__graph.pdf): PDF inclusion: multiple pdfs with page group inclu
+ded in a single page
 >
-<classpipe__handler_1_1_ignore_broken_pipe__inherit__graph.pdf, id=621, 248.93p
-t x 156.585pt>
-File: classpipe__handler_1_1_ignore_broken_pipe__inherit__graph.pdf Graphic fil
-e (type pdf)
-<use classpipe__handler_1_1_ignore_broken_pipe__inherit__graph.pdf>
-Package pdftex.def Info: classpipe__handler_1_1_ignore_broken_pipe__inherit__gr
-aph.pdf  used on input line 10.
-(pdftex.def)             Requested size: 248.0pt x 156.004pt.
- <./classpipe__handler_1_1_ignore_broken_pipe__coll__graph.pdf
+<classscripts_1_1pipe__handler_1_1_ignore_broken_pipe__inherit__graph.pdf, id=7
+40, 229.85875pt x 167.62625pt>
+File: classscripts_1_1pipe__handler_1_1_ignore_broken_pipe__inherit__graph.pdf 
+Graphic file (type pdf)
+<use classscripts_1_1pipe__handler_1_1_ignore_broken_pipe__inherit__graph.pdf>
+Package pdftex.def Info: classscripts_1_1pipe__handler_1_1_ignore_broken_pipe__
+inherit__graph.pdf  used on input line 10.
+(pdftex.def)             Requested size: 229.0pt x 167.0094pt.
+ <./classscripts_1_1pipe__handler_1_1_ignore_broken_pipe__coll__graph.pdf
 
-pdfTeX warning: pdflatex (file ./classpipe__handler_1_1_ignore_broken_pipe__col
-l__graph.pdf): PDF inclusion: multiple pdfs with page group included in a singl
-e page
+pdfTeX warning: pdflatex (file ./classscripts_1_1pipe__handler_1_1_ignore_broke
+n_pipe__coll__graph.pdf): PDF inclusion: multiple pdfs with page group included
+ in a single page
 >
-<classpipe__handler_1_1_ignore_broken_pipe__coll__graph.pdf, id=629, 248.93pt x
- 156.585pt>
-File: classpipe__handler_1_1_ignore_broken_pipe__coll__graph.pdf Graphic file (
-type pdf)
-<use classpipe__handler_1_1_ignore_broken_pipe__coll__graph.pdf>
-Package pdftex.def Info: classpipe__handler_1_1_ignore_broken_pipe__coll__graph
-.pdf  used on input line 20.
-(pdftex.def)             Requested size: 248.0pt x 156.004pt.
- [17
+<classscripts_1_1pipe__handler_1_1_ignore_broken_pipe__coll__graph.pdf, id=748,
+ 229.85875pt x 167.62625pt>
+File: classscripts_1_1pipe__handler_1_1_ignore_broken_pipe__coll__graph.pdf Gra
+phic file (type pdf)
+<use classscripts_1_1pipe__handler_1_1_ignore_broken_pipe__coll__graph.pdf>
+Package pdftex.def Info: classscripts_1_1pipe__handler_1_1_ignore_broken_pipe__
+coll__graph.pdf  used on input line 20.
+(pdftex.def)             Requested size: 229.0pt x 167.0094pt.
+ [21
 
-]) [18]
+]) [22]
 Chapter 8.
-(./cleaner_8py.tex) (./crawler__orchestrator_8py.tex) (./____init_____8py.tex)
-(./pubchem_8py.tex [19
+(./_r_e_a_d_m_e_8md.tex) (./run__pipeline_8py.tex) (./____init_____8py.tex)
+(./crawlers_2____init_____8py.tex)
+(./crawlers_2dependencies_2____init_____8py.tex) (./cleaner_8py.tex [23
 
-]) (./swissadme_8py.tex) (./swisstarget_8py.tex)
-(./merger_8py.tex) (./pipe__handler_8py.tex) (./populate__chem_8py.tex [20])
-(./_r_e_a_d_m_e_8md.tex) (./run__pipeline_8py.tex) [21] [22
+]
+Underfull \hbox (badness 1337) in paragraph at lines 29--31
+[]\T1/phv/m/n/10 pd.[]Data[]Frame [] (df, threshold=0.[]9, re-move=False, prese
+rve[]_[]
+ []
 
-] (./refman.ind
-[23
+
+Overfull \hbox (23.23987pt too wide) in paragraph at lines 35--37
+[]\T1/phv/m/n/10 def [] (input[]_[]file=\TS1/phv/m/n/10 '\T1/phv/m/n/10 ../data
+/chem[]_[]output/chem[]_[]populated.[]csv\TS1/phv/m/n/10 '\T1/phv/m/n/10 , outp
+ut[]_[]file=\TS1/phv/m/n/10 '\T1/phv/m/n/10 ../data/final/phototox.[]
+ []
 
 
-] [24
+Underfull \hbox (badness 1917) in paragraph at lines 35--37
+\T1/phv/m/n/10 csv\TS1/phv/m/n/10 '\T1/phv/m/n/10 , project[]_[]dir=\TS1/phv/m/
+n/10 '\T1/phv/m/n/10 ../\TS1/phv/m/n/10 '\T1/phv/m/n/10 , correlation[]_[]thres
+hold=0.[]95, outliers[]_[]threshold=4.[]2, preserve[]_[]columns=None, re-
+ []
+
+) (./crawler__orchestrator_8py.tex) (./pubchem_8py.tex [24])
+(./swissadme_8py.tex) (./swisstarget_8py.tex) (./merger_8py.tex)
+(./pipe__handler_8py.tex [25]) (./populate__chem_8py.tex) [26] (./refman.ind
+[27
+
+
+
+] [28
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 219.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 219.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 223.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 223.
  (./refman.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 219.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 219.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 223.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 223.
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: 9B65204B7C9C4ADAAC742FB48926FDC2;15762.
+(rerunfilecheck)             Checksum: C924A89860176DF387514493B34D71E6;19115.
  ) 
 Here is how much of TeX's memory you used:
- 16815 strings out of 483183
- 247750 string characters out of 5966291
- 525587 words of memory out of 5000000
- 31281 multiletter control sequences out of 15000+600000
+ 16877 strings out of 483183
+ 251252 string characters out of 5966291
+ 535528 words of memory out of 5000000
+ 31306 multiletter control sequences out of 15000+600000
  575433 words of font info for 71 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 55i,15n,96p,938b,396s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,15n,96p,938b,503s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/cour
-ier/ucrro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on refman.pdf (28 pages, 130512 bytes).
+-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
+w/courier/ucrro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/u
+hvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on refman.pdf (34 pages, 134348 bytes).
 PDF statistics:
- 901 PDF objects out of 1000 (max. 8388607)
- 847 compressed objects within 9 object streams
- 192 named destinations out of 1000 (max. 500000)
- 627 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1051 PDF objects out of 1200 (max. 8388607)
+ 991 compressed objects within 10 object streams
+ 221 named destinations out of 1000 (max. 500000)
+ 715 words of extra memory for PDF output out of 10000 (max. 10000000)
 

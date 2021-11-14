@@ -1,0 +1,241 @@
+\hypertarget{namespacescripts_1_1cleaner}{}\doxysection{scripts.\+cleaner Namespace Reference}
+\label{namespacescripts_1_1cleaner}\index{scripts.cleaner@{scripts.cleaner}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+pd.\+Data\+Frame \mbox{\hyperlink{namespacescripts_1_1cleaner_a408aba2a0072aa3c246e5e3c507efefe}{load\+\_\+data}} (str csv\+\_\+file)
+\item 
+pd.\+Data\+Frame \mbox{\hyperlink{namespacescripts_1_1cleaner_a5829635fea3da2e84f750578e972ad04}{set\+\_\+proper\+\_\+data\+\_\+type}} (pd.\+Data\+Frame df)
+\item 
+\mbox{[}str, int\mbox{]} \mbox{\hyperlink{namespacescripts_1_1cleaner_a9db5345496b081bd13be845ac8d37a52}{unique\+\_\+count}} (pd.\+Series column)
+\item 
+pd.\+Data\+Frame \mbox{\hyperlink{namespacescripts_1_1cleaner_a4e75fb866f46d9eb84aec4255e3b6be2}{remove\+\_\+useless\+\_\+columns}} (df)
+\item 
+list \mbox{\hyperlink{namespacescripts_1_1cleaner_ad847c48a6d22ed4b4ff18b5fc5749f60}{get\+\_\+duplicit\+\_\+correlated\+\_\+descriptors}} (nx.\+Multi\+Graph graphs, exclude)
+\item 
+def \mbox{\hyperlink{namespacescripts_1_1cleaner_a20cc9b5e1ac87291f0f70a77bd9b3352}{plot\+\_\+correlation\+\_\+heatmap}} (pd.\+Data\+Frame correlations, str fig\+\_\+location, int threshold)
+\item 
+def \mbox{\hyperlink{namespacescripts_1_1cleaner_ae5e76e6ece00a3e1b4cd386300164fa1}{get\+\_\+correlated\+\_\+descriptors}} (pd.\+Data\+Frame df, int threshold, str fig\+\_\+location)
+\item 
+def \mbox{\hyperlink{namespacescripts_1_1cleaner_a0e7bd31838c5f4ad4d80fa2e2832f700}{create\+\_\+correlation\+\_\+graphs}} (correlations, fig\+\_\+location, threshold)
+\item 
+def \mbox{\hyperlink{namespacescripts_1_1cleaner_ad33f94899640b081b1d434f09dc358f9}{create\+\_\+mask}} (df, mask\+\_\+name, \mbox{[}None, list\mbox{]} columns=None, \mbox{[}None, list\mbox{]} rows=None, data\+\_\+dir=\textquotesingle{}../data\textquotesingle{})
+\item 
+pd.\+Data\+Frame \mbox{\hyperlink{namespacescripts_1_1cleaner_af8445153fac777dccb82f15a2e37767d}{check\+\_\+correlated\+\_\+column}} (df, threshold=0.\+9, remove=False, preserve\+\_\+columns=\mbox{[}$\,$\mbox{]}, plot\+\_\+dir=\textquotesingle{}../plot\textquotesingle{}, data\+\_\+dir=\textquotesingle{}../data\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespacescripts_1_1cleaner_aa4f96f44f991cfa6799846feb76becd4}{remove\+\_\+duplicits}} (pd.\+Data\+Frame df, subset, keep=\textquotesingle{}first\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespacescripts_1_1cleaner_a3b154f4b50250ec9df207396ba44cd59}{check\+\_\+outliers}} (df, threshold=4.\+2, remove=False)
+\item 
+def \mbox{\hyperlink{namespacescripts_1_1cleaner_ab667996529a1de823f5f59062f7d5f7f}{main}} (input\+\_\+file=\textquotesingle{}../data/chem\+\_\+output/chem\+\_\+populated.\+csv\textquotesingle{}, output\+\_\+file=\textquotesingle{}../data/final/phototox.\+csv\textquotesingle{}, \mbox{\hyperlink{namespacescripts_1_1cleaner_a00f88882bd6e978b9e0390bedff93a47}{project\+\_\+dir}}=\textquotesingle{}../\textquotesingle{}, correlation\+\_\+threshold=0.\+95, outliers\+\_\+threshold=4.\+2, preserve\+\_\+columns=None, remove=False)
+\item 
+dict \mbox{\hyperlink{namespacescripts_1_1cleaner_ab037fa0be6e3011d3d304381af1acec2}{process\+\_\+config}} (config\+\_\+file=\textquotesingle{}../conf/cleaner.\+ini\textquotesingle{})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacescripts_1_1cleaner_a6ae4475dbe28156196f7ce020c11631f}{script\+\_\+dir}} = os.\+path.\+dirname(os.\+path.\+realpath(\+\_\+\+\_\+file\+\_\+\+\_\+))
+\item 
+\mbox{\hyperlink{namespacescripts_1_1cleaner_a00f88882bd6e978b9e0390bedff93a47}{project\+\_\+dir}} = os.\+path.\+dirname(\mbox{\hyperlink{namespacescripts_1_1cleaner_a6ae4475dbe28156196f7ce020c11631f}{script\+\_\+dir}})
+\item 
+dict \mbox{\hyperlink{namespacescripts_1_1cleaner_a2ec65131c01d34455d6b3f36b42e8b8a}{args}} = \mbox{\hyperlink{namespacescripts_1_1cleaner_ab037fa0be6e3011d3d304381af1acec2}{process\+\_\+config}}(os.\+path.\+join(\mbox{\hyperlink{namespacescripts_1_1cleaner_a00f88882bd6e978b9e0390bedff93a47}{project\+\_\+dir}}, \textquotesingle{}conf/cleaner.\+ini\textquotesingle{}))
+\item 
+\mbox{\hyperlink{namespacescripts_1_1cleaner_ae6e27288c17bd8faa15fcb55d96b7728}{input\+\_\+data}} = os.\+path.\+join(\mbox{\hyperlink{namespacescripts_1_1cleaner_a00f88882bd6e978b9e0390bedff93a47}{project\+\_\+dir}}, \textquotesingle{}data/chem\+\_\+output/chem\+\_\+populated.\+csv\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespacescripts_1_1cleaner_acc7b7f9b669de50897067bbeacec68c9}{output\+\_\+data}} = os.\+path.\+join(\mbox{\hyperlink{namespacescripts_1_1cleaner_a00f88882bd6e978b9e0390bedff93a47}{project\+\_\+dir}}, \textquotesingle{}data/chem\+\_\+output/phototox.\+csv\textquotesingle{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Clean input data. Deletes unuseful columns. Correlations columns and outliers are ether deleted or a mask is created.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacescripts_1_1cleaner_af8445153fac777dccb82f15a2e37767d}\label{namespacescripts_1_1cleaner_af8445153fac777dccb82f15a2e37767d}} 
+\index{scripts.cleaner@{scripts.cleaner}!check\_correlated\_column@{check\_correlated\_column}}
+\index{check\_correlated\_column@{check\_correlated\_column}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{check\_correlated\_column()}{check\_correlated\_column()}}
+{\footnotesize\ttfamily  pd.\+Data\+Frame scripts.\+cleaner.\+check\+\_\+correlated\+\_\+column (\begin{DoxyParamCaption}\item[{}]{df,  }\item[{}]{threshold = {\ttfamily 0.9},  }\item[{}]{remove = {\ttfamily False},  }\item[{}]{preserve\+\_\+columns = {\ttfamily \mbox{[}\mbox{]}},  }\item[{}]{plot\+\_\+dir = {\ttfamily \textquotesingle{}../plot\textquotesingle{}},  }\item[{}]{data\+\_\+dir = {\ttfamily \textquotesingle{}../data\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check weather some columns are not correlated over given threshold. If yes, remove them or create mask.
+:param df: input DataFrame
+:param threshold: correlation threshold
+:param remove: if True,remove these columns, otherwise make mask
+:param preserve_columns: columns, taht are alwais perseved
+:param plot_dir: dir to save generated correlation plot
+:param data_dir:dir to store masks
+:return: output DataFrame
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescripts_1_1cleaner_a3b154f4b50250ec9df207396ba44cd59}\label{namespacescripts_1_1cleaner_a3b154f4b50250ec9df207396ba44cd59}} 
+\index{scripts.cleaner@{scripts.cleaner}!check\_outliers@{check\_outliers}}
+\index{check\_outliers@{check\_outliers}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{check\_outliers()}{check\_outliers()}}
+{\footnotesize\ttfamily def scripts.\+cleaner.\+check\+\_\+outliers (\begin{DoxyParamCaption}\item[{}]{df,  }\item[{}]{threshold = {\ttfamily 4.2},  }\item[{}]{remove = {\ttfamily False} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check weather some outliners over given threshold (standart deviation). If yes, remove them, otherwise create mask.
+:param df: input DtaFrame
+:param threshold: standart deviation
+:param remove: if True, remove these columns, otherwise make mask
+:return: output DataFrame
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescripts_1_1cleaner_a0e7bd31838c5f4ad4d80fa2e2832f700}\label{namespacescripts_1_1cleaner_a0e7bd31838c5f4ad4d80fa2e2832f700}} 
+\index{scripts.cleaner@{scripts.cleaner}!create\_correlation\_graphs@{create\_correlation\_graphs}}
+\index{create\_correlation\_graphs@{create\_correlation\_graphs}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{create\_correlation\_graphs()}{create\_correlation\_graphs()}}
+{\footnotesize\ttfamily def scripts.\+cleaner.\+create\+\_\+correlation\+\_\+graphs (\begin{DoxyParamCaption}\item[{}]{correlations,  }\item[{}]{fig\+\_\+location,  }\item[{}]{threshold }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}:param correlations:
+:param fig_location:
+:param threshold:
+:return:
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescripts_1_1cleaner_ad33f94899640b081b1d434f09dc358f9}\label{namespacescripts_1_1cleaner_ad33f94899640b081b1d434f09dc358f9}} 
+\index{scripts.cleaner@{scripts.cleaner}!create\_mask@{create\_mask}}
+\index{create\_mask@{create\_mask}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{create\_mask()}{create\_mask()}}
+{\footnotesize\ttfamily def scripts.\+cleaner.\+create\+\_\+mask (\begin{DoxyParamCaption}\item[{}]{df,  }\item[{}]{mask\+\_\+name,  }\item[{\mbox{[}None, list\mbox{]} }]{columns = {\ttfamily None},  }\item[{\mbox{[}None, list\mbox{]} }]{rows = {\ttfamily None},  }\item[{}]{data\+\_\+dir = {\ttfamily \textquotesingle{}../data\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Creates mask from columns or rows.
+:param df: input Dataframe
+:param mask_name: mask name
+:param columns: input columns to mask
+:param rows: input rows to mask
+:param data_dir: dir to store mask
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescripts_1_1cleaner_ae5e76e6ece00a3e1b4cd386300164fa1}\label{namespacescripts_1_1cleaner_ae5e76e6ece00a3e1b4cd386300164fa1}} 
+\index{scripts.cleaner@{scripts.cleaner}!get\_correlated\_descriptors@{get\_correlated\_descriptors}}
+\index{get\_correlated\_descriptors@{get\_correlated\_descriptors}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{get\_correlated\_descriptors()}{get\_correlated\_descriptors()}}
+{\footnotesize\ttfamily def scripts.\+cleaner.\+get\+\_\+correlated\+\_\+descriptors (\begin{DoxyParamCaption}\item[{pd.\+Data\+Frame}]{df,  }\item[{int}]{threshold,  }\item[{str}]{fig\+\_\+location }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This function creates correlation between descriptors
+:param df: input DataFrame
+:param threshold: threshold for minimal correlation
+:param fig_location: location of correlation figure
+:return: created correlations
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescripts_1_1cleaner_ad847c48a6d22ed4b4ff18b5fc5749f60}\label{namespacescripts_1_1cleaner_ad847c48a6d22ed4b4ff18b5fc5749f60}} 
+\index{scripts.cleaner@{scripts.cleaner}!get\_duplicit\_correlated\_descriptors@{get\_duplicit\_correlated\_descriptors}}
+\index{get\_duplicit\_correlated\_descriptors@{get\_duplicit\_correlated\_descriptors}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{get\_duplicit\_correlated\_descriptors()}{get\_duplicit\_correlated\_descriptors()}}
+{\footnotesize\ttfamily  list scripts.\+cleaner.\+get\+\_\+duplicit\+\_\+correlated\+\_\+descriptors (\begin{DoxyParamCaption}\item[{nx.\+Multi\+Graph}]{graphs,  }\item[{}]{exclude }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fnc extract corelated  descriptors (column names) from graphs. From each correlation group is excluded one item,
+or if some items from exclude are in correlation, these items are excluded instead.
+:param graphs: input graphs
+:param exclude: list of descriptors to exclude from final result
+:return: list of correlated descriptors without excluded
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescripts_1_1cleaner_a408aba2a0072aa3c246e5e3c507efefe}\label{namespacescripts_1_1cleaner_a408aba2a0072aa3c246e5e3c507efefe}} 
+\index{scripts.cleaner@{scripts.cleaner}!load\_data@{load\_data}}
+\index{load\_data@{load\_data}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{load\_data()}{load\_data()}}
+{\footnotesize\ttfamily  pd.\+Data\+Frame scripts.\+cleaner.\+load\+\_\+data (\begin{DoxyParamCaption}\item[{str}]{csv\+\_\+file }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Load data from csv ta pandas DataFrame
+:param csv_file: csv file name
+:return: loaded DataFrame
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescripts_1_1cleaner_ab667996529a1de823f5f59062f7d5f7f}\label{namespacescripts_1_1cleaner_ab667996529a1de823f5f59062f7d5f7f}} 
+\index{scripts.cleaner@{scripts.cleaner}!main@{main}}
+\index{main@{main}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def scripts.\+cleaner.\+main (\begin{DoxyParamCaption}\item[{}]{input\+\_\+file = {\ttfamily \textquotesingle{}../data/chem\+\_\+output/chem\+\_\+populated.csv\textquotesingle{}},  }\item[{}]{output\+\_\+file = {\ttfamily \textquotesingle{}../data/final/phototox.csv\textquotesingle{}},  }\item[{}]{project\+\_\+dir = {\ttfamily \textquotesingle{}../\textquotesingle{}},  }\item[{}]{correlation\+\_\+threshold = {\ttfamily 0.95},  }\item[{}]{outliers\+\_\+threshold = {\ttfamily 4.2},  }\item[{}]{preserve\+\_\+columns = {\ttfamily None},  }\item[{}]{remove = {\ttfamily False} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacescripts_1_1cleaner_a20cc9b5e1ac87291f0f70a77bd9b3352}\label{namespacescripts_1_1cleaner_a20cc9b5e1ac87291f0f70a77bd9b3352}} 
+\index{scripts.cleaner@{scripts.cleaner}!plot\_correlation\_heatmap@{plot\_correlation\_heatmap}}
+\index{plot\_correlation\_heatmap@{plot\_correlation\_heatmap}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{plot\_correlation\_heatmap()}{plot\_correlation\_heatmap()}}
+{\footnotesize\ttfamily def scripts.\+cleaner.\+plot\+\_\+correlation\+\_\+heatmap (\begin{DoxyParamCaption}\item[{pd.\+Data\+Frame}]{correlations,  }\item[{str}]{fig\+\_\+location,  }\item[{int}]{threshold }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Plot heatmap of correlated descriptors
+:param correlations:input DataFrame with correlations
+:param fig_location: path to store plot
+:param threshold: used threshold to generate correlations
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescripts_1_1cleaner_ab037fa0be6e3011d3d304381af1acec2}\label{namespacescripts_1_1cleaner_ab037fa0be6e3011d3d304381af1acec2}} 
+\index{scripts.cleaner@{scripts.cleaner}!process\_config@{process\_config}}
+\index{process\_config@{process\_config}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{process\_config()}{process\_config()}}
+{\footnotesize\ttfamily  dict scripts.\+cleaner.\+process\+\_\+config (\begin{DoxyParamCaption}\item[{}]{config\+\_\+file = {\ttfamily \textquotesingle{}../conf/cleaner.ini\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Process input config and extract
+:param config_file: config file name location
+:return: configuration
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescripts_1_1cleaner_aa4f96f44f991cfa6799846feb76becd4}\label{namespacescripts_1_1cleaner_aa4f96f44f991cfa6799846feb76becd4}} 
+\index{scripts.cleaner@{scripts.cleaner}!remove\_duplicits@{remove\_duplicits}}
+\index{remove\_duplicits@{remove\_duplicits}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{remove\_duplicits()}{remove\_duplicits()}}
+{\footnotesize\ttfamily def scripts.\+cleaner.\+remove\+\_\+duplicits (\begin{DoxyParamCaption}\item[{pd.\+Data\+Frame}]{df,  }\item[{}]{subset,  }\item[{}]{keep = {\ttfamily \textquotesingle{}first\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Removes duplicit rows
+:param df: nput DataFrame
+:param subset: columns where to check duplicity
+:param keep: keep argument
+:return: output DataFrame
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescripts_1_1cleaner_a4e75fb866f46d9eb84aec4255e3b6be2}\label{namespacescripts_1_1cleaner_a4e75fb866f46d9eb84aec4255e3b6be2}} 
+\index{scripts.cleaner@{scripts.cleaner}!remove\_useless\_columns@{remove\_useless\_columns}}
+\index{remove\_useless\_columns@{remove\_useless\_columns}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{remove\_useless\_columns()}{remove\_useless\_columns()}}
+{\footnotesize\ttfamily  pd.\+Data\+Frame scripts.\+cleaner.\+remove\+\_\+useless\+\_\+columns (\begin{DoxyParamCaption}\item[{}]{df }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Remove columns from DataFrame, that are duplicated from multiple sources or otherwise unuseful
+:param df: input DataFrame
+:return: reduced DataFrame
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescripts_1_1cleaner_a5829635fea3da2e84f750578e972ad04}\label{namespacescripts_1_1cleaner_a5829635fea3da2e84f750578e972ad04}} 
+\index{scripts.cleaner@{scripts.cleaner}!set\_proper\_data\_type@{set\_proper\_data\_type}}
+\index{set\_proper\_data\_type@{set\_proper\_data\_type}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{set\_proper\_data\_type()}{set\_proper\_data\_type()}}
+{\footnotesize\ttfamily  pd.\+Data\+Frame scripts.\+cleaner.\+set\+\_\+proper\+\_\+data\+\_\+type (\begin{DoxyParamCaption}\item[{pd.\+Data\+Frame}]{df }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Set data types to df columns.
+:param df: input DataFrame
+:return: df with changed types
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescripts_1_1cleaner_a9db5345496b081bd13be845ac8d37a52}\label{namespacescripts_1_1cleaner_a9db5345496b081bd13be845ac8d37a52}} 
+\index{scripts.cleaner@{scripts.cleaner}!unique\_count@{unique\_count}}
+\index{unique\_count@{unique\_count}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{unique\_count()}{unique\_count()}}
+{\footnotesize\ttfamily  \mbox{[}str, int\mbox{]} scripts.\+cleaner.\+unique\+\_\+count (\begin{DoxyParamCaption}\item[{pd.\+Series}]{column }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get number of unique values in Series
+:param column: input Series
+:return: columns name and number of unique values
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacescripts_1_1cleaner_a2ec65131c01d34455d6b3f36b42e8b8a}\label{namespacescripts_1_1cleaner_a2ec65131c01d34455d6b3f36b42e8b8a}} 
+\index{scripts.cleaner@{scripts.cleaner}!args@{args}}
+\index{args@{args}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{args}{args}}
+{\footnotesize\ttfamily dict scripts.\+cleaner.\+args = \mbox{\hyperlink{namespacescripts_1_1cleaner_ab037fa0be6e3011d3d304381af1acec2}{process\+\_\+config}}(os.\+path.\+join(\mbox{\hyperlink{namespacescripts_1_1cleaner_a00f88882bd6e978b9e0390bedff93a47}{project\+\_\+dir}}, \textquotesingle{}conf/cleaner.\+ini\textquotesingle{}))}
+
+\mbox{\Hypertarget{namespacescripts_1_1cleaner_ae6e27288c17bd8faa15fcb55d96b7728}\label{namespacescripts_1_1cleaner_ae6e27288c17bd8faa15fcb55d96b7728}} 
+\index{scripts.cleaner@{scripts.cleaner}!input\_data@{input\_data}}
+\index{input\_data@{input\_data}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{input\_data}{input\_data}}
+{\footnotesize\ttfamily scripts.\+cleaner.\+input\+\_\+data = os.\+path.\+join(\mbox{\hyperlink{namespacescripts_1_1cleaner_a00f88882bd6e978b9e0390bedff93a47}{project\+\_\+dir}}, \textquotesingle{}data/chem\+\_\+output/chem\+\_\+populated.\+csv\textquotesingle{})}
+
+\mbox{\Hypertarget{namespacescripts_1_1cleaner_acc7b7f9b669de50897067bbeacec68c9}\label{namespacescripts_1_1cleaner_acc7b7f9b669de50897067bbeacec68c9}} 
+\index{scripts.cleaner@{scripts.cleaner}!output\_data@{output\_data}}
+\index{output\_data@{output\_data}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{output\_data}{output\_data}}
+{\footnotesize\ttfamily scripts.\+cleaner.\+output\+\_\+data = os.\+path.\+join(\mbox{\hyperlink{namespacescripts_1_1cleaner_a00f88882bd6e978b9e0390bedff93a47}{project\+\_\+dir}}, \textquotesingle{}data/chem\+\_\+output/phototox.\+csv\textquotesingle{})}
+
+\mbox{\Hypertarget{namespacescripts_1_1cleaner_a00f88882bd6e978b9e0390bedff93a47}\label{namespacescripts_1_1cleaner_a00f88882bd6e978b9e0390bedff93a47}} 
+\index{scripts.cleaner@{scripts.cleaner}!project\_dir@{project\_dir}}
+\index{project\_dir@{project\_dir}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{project\_dir}{project\_dir}}
+{\footnotesize\ttfamily scripts.\+cleaner.\+project\+\_\+dir = os.\+path.\+dirname(\mbox{\hyperlink{namespacescripts_1_1cleaner_a6ae4475dbe28156196f7ce020c11631f}{script\+\_\+dir}})}
+
+\mbox{\Hypertarget{namespacescripts_1_1cleaner_a6ae4475dbe28156196f7ce020c11631f}\label{namespacescripts_1_1cleaner_a6ae4475dbe28156196f7ce020c11631f}} 
+\index{scripts.cleaner@{scripts.cleaner}!script\_dir@{script\_dir}}
+\index{script\_dir@{script\_dir}!scripts.cleaner@{scripts.cleaner}}
+\doxysubsubsection{\texorpdfstring{script\_dir}{script\_dir}}
+{\footnotesize\ttfamily scripts.\+cleaner.\+script\+\_\+dir = os.\+path.\+dirname(os.\+path.\+realpath(\+\_\+\+\_\+file\+\_\+\+\_\+))}
+

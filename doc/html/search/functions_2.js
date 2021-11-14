@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['get_5fcorrelated_5fdescriptors_76',['get_correlated_descriptors',['../namespacecleaner.html#af4b2c7950601ca88518429da4e265e39',1,'cleaner']]],
-  ['get_5fduplicit_5fcorrelated_5fdescriptors_77',['get_duplicit_correlated_descriptors',['../namespacecleaner.html#ab63851bfa578936553825d2ab38d9a17',1,'cleaner']]]
+  ['get_5fcorrelated_5fdescriptors_87',['get_correlated_descriptors',['../namespacescripts_1_1cleaner.html#ae5e76e6ece00a3e1b4cd386300164fa1',1,'scripts::cleaner']]],
+  ['get_5fduplicit_5fcorrelated_5fdescriptors_88',['get_duplicit_correlated_descriptors',['../namespacescripts_1_1cleaner.html#ad847c48a6d22ed4b4ff18b5fc5749f60',1,'scripts::cleaner']]]
 ];

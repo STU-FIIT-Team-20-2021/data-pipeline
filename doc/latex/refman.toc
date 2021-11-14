@@ -9,70 +9,81 @@
 \contentsline {chapter}{\numberline {5}File Index}{9}{chapter.5}%
 \contentsline {section}{\numberline {5.1}File List}{9}{section.5.1}%
 \contentsline {chapter}{\numberline {6}Namespace Documentation}{11}{chapter.6}%
-\contentsline {section}{\numberline {6.1}cleaner Namespace Reference}{11}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Function Documentation}{11}{subsection.6.1.1}%
-\contentsline {subsubsection}{\numberline {6.1.1.1}check\_correlated\_column()}{11}{subsubsection.6.1.1.1}%
-\contentsline {subsubsection}{\numberline {6.1.1.2}check\_outliers()}{12}{subsubsection.6.1.1.2}%
-\contentsline {subsubsection}{\numberline {6.1.1.3}create\_correlation\_graphs()}{12}{subsubsection.6.1.1.3}%
-\contentsline {subsubsection}{\numberline {6.1.1.4}get\_correlated\_descriptors()}{12}{subsubsection.6.1.1.4}%
-\contentsline {subsubsection}{\numberline {6.1.1.5}get\_duplicit\_correlated\_descriptors()}{12}{subsubsection.6.1.1.5}%
-\contentsline {subsubsection}{\numberline {6.1.1.6}load\_data()}{12}{subsubsection.6.1.1.6}%
-\contentsline {subsubsection}{\numberline {6.1.1.7}main()}{12}{subsubsection.6.1.1.7}%
-\contentsline {subsubsection}{\numberline {6.1.1.8}process\_config()}{12}{subsubsection.6.1.1.8}%
-\contentsline {subsubsection}{\numberline {6.1.1.9}remove\_duplicits()}{13}{subsubsection.6.1.1.9}%
-\contentsline {subsubsection}{\numberline {6.1.1.10}remove\_useless\_columns()}{13}{subsubsection.6.1.1.10}%
-\contentsline {subsubsection}{\numberline {6.1.1.11}save\_mask()}{13}{subsubsection.6.1.1.11}%
-\contentsline {subsubsection}{\numberline {6.1.1.12}set\_proper\_data\_type()}{13}{subsubsection.6.1.1.12}%
-\contentsline {subsubsection}{\numberline {6.1.1.13}unique\_count()}{13}{subsubsection.6.1.1.13}%
-\contentsline {subsection}{\numberline {6.1.2}Variable Documentation}{13}{subsection.6.1.2}%
-\contentsline {subsubsection}{\numberline {6.1.2.1}args}{13}{subsubsection.6.1.2.1}%
-\contentsline {section}{\numberline {6.2}crawler\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}orchestrator Namespace Reference}{13}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Function Documentation}{13}{subsection.6.2.1}%
-\contentsline {subsubsection}{\numberline {6.2.1.1}main()}{13}{subsubsection.6.2.1.1}%
-\contentsline {section}{\numberline {6.3}dependencies Namespace Reference}{14}{section.6.3}%
-\contentsline {section}{\numberline {6.4}dependencies.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}pubchem Namespace Reference}{14}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Function Documentation}{14}{subsection.6.4.1}%
-\contentsline {subsubsection}{\numberline {6.4.1.1}crawl()}{14}{subsubsection.6.4.1.1}%
-\contentsline {section}{\numberline {6.5}dependencies.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}swissadme Namespace Reference}{14}{section.6.5}%
-\contentsline {subsection}{\numberline {6.5.1}Function Documentation}{14}{subsection.6.5.1}%
-\contentsline {subsubsection}{\numberline {6.5.1.1}crawl()}{14}{subsubsection.6.5.1.1}%
-\contentsline {subsubsection}{\numberline {6.5.1.2}is\_file\_downloaded()}{14}{subsubsection.6.5.1.2}%
-\contentsline {section}{\numberline {6.6}dependencies.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}swisstarget Namespace Reference}{14}{section.6.6}%
-\contentsline {subsection}{\numberline {6.6.1}Function Documentation}{14}{subsection.6.6.1}%
-\contentsline {subsubsection}{\numberline {6.6.1.1}crawl()}{15}{subsubsection.6.6.1.1}%
-\contentsline {subsubsection}{\numberline {6.6.1.2}is\_file\_downloaded()}{15}{subsubsection.6.6.1.2}%
-\contentsline {section}{\numberline {6.7}merger Namespace Reference}{15}{section.6.7}%
-\contentsline {subsection}{\numberline {6.7.1}Function Documentation}{15}{subsection.6.7.1}%
-\contentsline {subsubsection}{\numberline {6.7.1.1}merge()}{15}{subsubsection.6.7.1.1}%
-\contentsline {section}{\numberline {6.8}pipe\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler Namespace Reference}{15}{section.6.8}%
-\contentsline {section}{\numberline {6.9}populate\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}chem Namespace Reference}{15}{section.6.9}%
-\contentsline {subsection}{\numberline {6.9.1}Function Documentation}{15}{subsection.6.9.1}%
-\contentsline {subsubsection}{\numberline {6.9.1.1}populate()}{15}{subsubsection.6.9.1.1}%
-\contentsline {section}{\numberline {6.10}run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}pipeline Namespace Reference}{15}{section.6.10}%
-\contentsline {subsection}{\numberline {6.10.1}Variable Documentation}{16}{subsection.6.10.1}%
-\contentsline {subsubsection}{\numberline {6.10.1.1}args}{16}{subsubsection.6.10.1.1}%
-\contentsline {subsubsection}{\numberline {6.10.1.2}help}{16}{subsubsection.6.10.1.2}%
-\contentsline {subsubsection}{\numberline {6.10.1.3}parser}{16}{subsubsection.6.10.1.3}%
-\contentsline {subsubsection}{\numberline {6.10.1.4}str}{16}{subsubsection.6.10.1.4}%
-\contentsline {subsubsection}{\numberline {6.10.1.5}type}{16}{subsubsection.6.10.1.5}%
-\contentsline {chapter}{\numberline {7}Class Documentation}{17}{chapter.7}%
-\contentsline {section}{\numberline {7.1}pipe\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Ignore\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Broken\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Pipe Class Reference}{17}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Constructor \& Destructor Documentation}{18}{subsection.7.1.1}%
-\contentsline {subsubsection}{\numberline {7.1.1.1}\_\_init\_\_()}{18}{subsubsection.7.1.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Member Data Documentation}{18}{subsection.7.1.2}%
-\contentsline {subsubsection}{\numberline {7.1.2.1}flush}{18}{subsubsection.7.1.2.1}%
-\contentsline {subsubsection}{\numberline {7.1.2.2}stream}{18}{subsubsection.7.1.2.2}%
-\contentsline {subsubsection}{\numberline {7.1.2.3}write}{18}{subsubsection.7.1.2.3}%
-\contentsline {chapter}{\numberline {8}File Documentation}{19}{chapter.8}%
-\contentsline {section}{\numberline {8.1}cleaner.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{19}{section.8.1}%
-\contentsline {section}{\numberline {8.2}crawlers/crawler\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}orchestrator.py File Reference}{19}{section.8.2}%
-\contentsline {section}{\numberline {8.3}crawlers/dependencies/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}init\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}.py File Reference}{19}{section.8.3}%
-\contentsline {section}{\numberline {8.4}crawlers/dependencies/pubchem.py File Reference}{20}{section.8.4}%
-\contentsline {section}{\numberline {8.5}crawlers/dependencies/swissadme.py File Reference}{20}{section.8.5}%
-\contentsline {section}{\numberline {8.6}crawlers/dependencies/swisstarget.py File Reference}{20}{section.8.6}%
-\contentsline {section}{\numberline {8.7}merger.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{20}{section.8.7}%
-\contentsline {section}{\numberline {8.8}pipe\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{20}{section.8.8}%
-\contentsline {section}{\numberline {8.9}populate\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}chem.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{20}{section.8.9}%
-\contentsline {section}{\numberline {8.10}R\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}E\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}A\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}D\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}M\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}E.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}md File Reference}{21}{section.8.10}%
-\contentsline {section}{\numberline {8.11}run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}pipeline.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{21}{section.8.11}%
-\contentsline {chapter}{Index}{23}{section*.36}%
+\contentsline {section}{\numberline {6.1}run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}pipeline Namespace Reference}{11}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Variable Documentation}{11}{subsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.1.1}action}{11}{subsubsection.6.1.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.1.2}args}{11}{subsubsection.6.1.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.1.3}help}{11}{subsubsection.6.1.1.3}%
+\contentsline {subsubsection}{\numberline {6.1.1.4}parser}{12}{subsubsection.6.1.1.4}%
+\contentsline {subsubsection}{\numberline {6.1.1.5}str}{12}{subsubsection.6.1.1.5}%
+\contentsline {subsubsection}{\numberline {6.1.1.6}type}{12}{subsubsection.6.1.1.6}%
+\contentsline {section}{\numberline {6.2}scripts Namespace Reference}{12}{section.6.2}%
+\contentsline {section}{\numberline {6.3}scripts.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cleaner Namespace Reference}{12}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Detailed Description}{13}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Function Documentation}{13}{subsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.2.1}check\_correlated\_column()}{13}{subsubsection.6.3.2.1}%
+\contentsline {subsubsection}{\numberline {6.3.2.2}check\_outliers()}{13}{subsubsection.6.3.2.2}%
+\contentsline {subsubsection}{\numberline {6.3.2.3}create\_correlation\_graphs()}{14}{subsubsection.6.3.2.3}%
+\contentsline {subsubsection}{\numberline {6.3.2.4}create\_mask()}{14}{subsubsection.6.3.2.4}%
+\contentsline {subsubsection}{\numberline {6.3.2.5}get\_correlated\_descriptors()}{14}{subsubsection.6.3.2.5}%
+\contentsline {subsubsection}{\numberline {6.3.2.6}get\_duplicit\_correlated\_descriptors()}{15}{subsubsection.6.3.2.6}%
+\contentsline {subsubsection}{\numberline {6.3.2.7}load\_data()}{15}{subsubsection.6.3.2.7}%
+\contentsline {subsubsection}{\numberline {6.3.2.8}main()}{15}{subsubsection.6.3.2.8}%
+\contentsline {subsubsection}{\numberline {6.3.2.9}plot\_correlation\_heatmap()}{15}{subsubsection.6.3.2.9}%
+\contentsline {subsubsection}{\numberline {6.3.2.10}process\_config()}{16}{subsubsection.6.3.2.10}%
+\contentsline {subsubsection}{\numberline {6.3.2.11}remove\_duplicits()}{16}{subsubsection.6.3.2.11}%
+\contentsline {subsubsection}{\numberline {6.3.2.12}remove\_useless\_columns()}{16}{subsubsection.6.3.2.12}%
+\contentsline {subsubsection}{\numberline {6.3.2.13}set\_proper\_data\_type()}{16}{subsubsection.6.3.2.13}%
+\contentsline {subsubsection}{\numberline {6.3.2.14}unique\_count()}{17}{subsubsection.6.3.2.14}%
+\contentsline {subsection}{\numberline {6.3.3}Variable Documentation}{17}{subsection.6.3.3}%
+\contentsline {subsubsection}{\numberline {6.3.3.1}args}{17}{subsubsection.6.3.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.3.2}input\_data}{17}{subsubsection.6.3.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.3.3}output\_data}{17}{subsubsection.6.3.3.3}%
+\contentsline {subsubsection}{\numberline {6.3.3.4}project\_dir}{17}{subsubsection.6.3.3.4}%
+\contentsline {subsubsection}{\numberline {6.3.3.5}script\_dir}{17}{subsubsection.6.3.3.5}%
+\contentsline {section}{\numberline {6.4}scripts.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}crawlers Namespace Reference}{17}{section.6.4}%
+\contentsline {section}{\numberline {6.5}scripts.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}crawlers.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}crawler\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}orchestrator Namespace Reference}{18}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Function Documentation}{18}{subsection.6.5.1}%
+\contentsline {subsubsection}{\numberline {6.5.1.1}main()}{18}{subsubsection.6.5.1.1}%
+\contentsline {section}{\numberline {6.6}scripts.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}crawlers.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}dependencies Namespace Reference}{18}{section.6.6}%
+\contentsline {section}{\numberline {6.7}scripts.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}crawlers.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}dependencies.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}pubchem Namespace Reference}{18}{section.6.7}%
+\contentsline {subsection}{\numberline {6.7.1}Function Documentation}{18}{subsection.6.7.1}%
+\contentsline {subsubsection}{\numberline {6.7.1.1}crawl()}{18}{subsubsection.6.7.1.1}%
+\contentsline {section}{\numberline {6.8}scripts.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}crawlers.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}dependencies.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}swissadme Namespace Reference}{18}{section.6.8}%
+\contentsline {subsection}{\numberline {6.8.1}Function Documentation}{19}{subsection.6.8.1}%
+\contentsline {subsubsection}{\numberline {6.8.1.1}crawl()}{19}{subsubsection.6.8.1.1}%
+\contentsline {subsubsection}{\numberline {6.8.1.2}is\_file\_downloaded()}{19}{subsubsection.6.8.1.2}%
+\contentsline {section}{\numberline {6.9}scripts.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}crawlers.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}dependencies.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}swisstarget Namespace Reference}{19}{section.6.9}%
+\contentsline {subsection}{\numberline {6.9.1}Function Documentation}{19}{subsection.6.9.1}%
+\contentsline {subsubsection}{\numberline {6.9.1.1}crawl()}{19}{subsubsection.6.9.1.1}%
+\contentsline {subsubsection}{\numberline {6.9.1.2}is\_file\_downloaded()}{19}{subsubsection.6.9.1.2}%
+\contentsline {section}{\numberline {6.10}scripts.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}merger Namespace Reference}{20}{section.6.10}%
+\contentsline {subsection}{\numberline {6.10.1}Function Documentation}{20}{subsection.6.10.1}%
+\contentsline {subsubsection}{\numberline {6.10.1.1}merge()}{20}{subsubsection.6.10.1.1}%
+\contentsline {section}{\numberline {6.11}scripts.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}pipe\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler Namespace Reference}{20}{section.6.11}%
+\contentsline {section}{\numberline {6.12}scripts.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}populate\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}chem Namespace Reference}{20}{section.6.12}%
+\contentsline {subsection}{\numberline {6.12.1}Function Documentation}{20}{subsection.6.12.1}%
+\contentsline {subsubsection}{\numberline {6.12.1.1}populate()}{20}{subsubsection.6.12.1.1}%
+\contentsline {chapter}{\numberline {7}Class Documentation}{21}{chapter.7}%
+\contentsline {section}{\numberline {7.1}scripts.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}pipe\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Ignore\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Broken\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Pipe Class Reference}{21}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Constructor \& Destructor Documentation}{22}{subsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.1.1}\_\_init\_\_()}{22}{subsubsection.7.1.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Member Data Documentation}{22}{subsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.2.1}flush}{22}{subsubsection.7.1.2.1}%
+\contentsline {subsubsection}{\numberline {7.1.2.2}stream}{22}{subsubsection.7.1.2.2}%
+\contentsline {subsubsection}{\numberline {7.1.2.3}write}{22}{subsubsection.7.1.2.3}%
+\contentsline {chapter}{\numberline {8}File Documentation}{23}{chapter.8}%
+\contentsline {section}{\numberline {8.1}R\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}E\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}A\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}D\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}M\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}E.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}md File Reference}{23}{section.8.1}%
+\contentsline {section}{\numberline {8.2}run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}pipeline.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{23}{section.8.2}%
+\contentsline {section}{\numberline {8.3}scripts/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}init\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}.py File Reference}{23}{section.8.3}%
+\contentsline {section}{\numberline {8.4}scripts/crawlers/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}init\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}.py File Reference}{23}{section.8.4}%
+\contentsline {section}{\numberline {8.5}scripts/crawlers/dependencies/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}init\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}.py File Reference}{24}{section.8.5}%
+\contentsline {section}{\numberline {8.6}scripts/cleaner.py File Reference}{24}{section.8.6}%
+\contentsline {section}{\numberline {8.7}scripts/crawlers/crawler\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}orchestrator.py File Reference}{24}{section.8.7}%
+\contentsline {section}{\numberline {8.8}scripts/crawlers/dependencies/pubchem.py File Reference}{25}{section.8.8}%
+\contentsline {section}{\numberline {8.9}scripts/crawlers/dependencies/swissadme.py File Reference}{25}{section.8.9}%
+\contentsline {section}{\numberline {8.10}scripts/crawlers/dependencies/swisstarget.py File Reference}{25}{section.8.10}%
+\contentsline {section}{\numberline {8.11}scripts/merger.py File Reference}{25}{section.8.11}%
+\contentsline {section}{\numberline {8.12}scripts/pipe\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.py File Reference}{26}{section.8.12}%
+\contentsline {section}{\numberline {8.13}scripts/populate\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}chem.py File Reference}{26}{section.8.13}%
+\contentsline {chapter}{Index}{27}{section*.40}%

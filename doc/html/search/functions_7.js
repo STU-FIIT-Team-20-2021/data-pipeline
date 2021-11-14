@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['remove_5fduplicits_84',['remove_duplicits',['../namespacecleaner.html#a4a5550bd6b2d44576d1890e8f942b4bc',1,'cleaner']]],
-  ['remove_5fuseless_5fcolumns_85',['remove_useless_columns',['../namespacecleaner.html#acb1f774b79353e0c57146156f289075f',1,'cleaner']]]
+  ['remove_5fduplicits_96',['remove_duplicits',['../namespacescripts_1_1cleaner.html#aa4f96f44f991cfa6799846feb76becd4',1,'scripts::cleaner']]],
+  ['remove_5fuseless_5fcolumns_97',['remove_useless_columns',['../namespacescripts_1_1cleaner.html#a4e75fb866f46d9eb84aec4255e3b6be2',1,'scripts::cleaner']]]
 ];

@@ -86,17 +86,19 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="title">Usage: </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="el" href="merger_8py.html">merger.py</a> automatically attempts to read **'new_pubchem.csv'** and **'new_swiss.csv'** from **./data** and then outputs **./merger/merge.csv**</p>
-<p>Altnernatively, use <b><a class="el" href="merger_8py.html">merger.py</a> -h</b> to show arguments that allow passing of specific files on input.</p>
-<hr  />
-<p> <a class="el" href="populate__chem_8py.html">populate_chem.py</a> attempts to read data from **./merger/merge.csv** then output it to **./chem/new_attrib.csv** </p>
+<div class="textblock"><p>Run the file <a class="el" href="run__pipeline_8py.html">run_pipeline.py</a> after installing python using conda from environment.yml</p>
+<p><a class="el" href="run__pipeline_8py.html">run_pipeline.py</a> supports the following arguments:</p><ul>
+<li><b>-inputfile "path"</b> to specify .csv containing [phototoxic, name] pairs, where phototoxic is either 0 or 1</li>
+<li><b>-outputfile "path"</b> to specify final output for .csv file</li>
+<li><b>-noscrape</b> to skip the scraping using crawlers </li>
+</ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Nov 13 2021 18:13:36 for DataPipeline by
+    <li class="footer">Generated on Sun Nov 14 2021 11:34:13 for DataPipeline by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

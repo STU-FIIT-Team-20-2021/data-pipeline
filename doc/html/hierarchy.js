@@ -1,6 +1,6 @@
 var hierarchy =
 [
     [ "object", null, [
-      [ "pipe_handler.IgnoreBrokenPipe", "classpipe__handler_1_1_ignore_broken_pipe.html", null ]
+      [ "scripts.pipe_handler.IgnoreBrokenPipe", "classscripts_1_1pipe__handler_1_1_ignore_broken_pipe.html", null ]
     ] ]
 ];
