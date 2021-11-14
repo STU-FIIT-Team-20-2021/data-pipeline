@@ -288,5 +288,5 @@ if __name__ == "__main__":
 
     args = process_config(os.path.join(project_dir, 'conf/cleaner.ini'))
     input_data = os.path.join(project_dir, 'data/chem_output/chem_populated.csv')
-    output_data = os.path.join(project_dir, 'data/chem_output/phototox.csv')
+    output_data = os.path.join(project_dir, 'data/final/phototox.csv')
     main(input_data, output_data, project_dir=project_dir, **args)
