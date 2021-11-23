@@ -1,7 +1,10 @@
-from scripts import populate_chem, cleaner, merger
-import scripts.crawlers.crawler_orchestrator as crawler
+"""Manages the execution of the pipeline."""
 import argparse
 import shutil
+import sys
+
+from scripts import populate_chem, cleaner, merger
+import scripts.crawlers.crawler_orchestrator as crawler
 
 
 def run_pipe():
@@ -13,19 +16,22 @@ def run_pipe():
     Multiple arguments are supported, as described in README.
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument('-inputfile', type=str, help="Input file location.")
-    parser.add_argument('-outputfile', type=str, help="Output file destination.")
-    parser.add_argument('-noscrape', action='store_false', help="Skip scraping/crawler step.")
-    parser.add_argument('-executestep', type=int, help="Execute only one step of the pipeline by index (from 0): "
-                                                       "[crawler, merger, chem_populator, cleaner]")
-    parser.add_argument('-args', type=str, help="Pass custom positional arguments to function. Used with -executestep")
-    parser.add_argument('-kwargs', type=str, help="Pass custom keyword arguments to function. Used with -executestep")
+    parser.add_argument("-inputfile", type=str, help="Input file location.")
+    parser.add_argument("-outputfile", type=str, help="Output file destination.")
+    parser.add_argument("-noscrape", action="store_false", help="Skip scraping/crawler step.")
+    parser.add_argument("-executestep", type=int,
+                        help="Execute only one step of the pipeline by index (from 0): "
+                             "[crawler, merger, chem_populator, cleaner]")
+    parser.add_argument("-args", type=str,
+                        help="Pass custom positional arguments to function. Used with -executestep")
+    parser.add_argument("-kwargs", type=str,
+                        help="Pass custom keyword arguments to function. Used with -executestep")
 
     args = parser.parse_args()
     steps = [crawler.main, merger.merge, populate_chem.populate, cleaner.main]
 
-    posargs=()
-    kwargs= {}
+    posargs = ()
+    kwargs = {}
 
     if args.args:
         posargs = args.args.split(',')
@@ -39,13 +45,13 @@ def run_pipe():
     if args.executestep:
         if args.args:
             steps[args.executestep](*posargs)
-            exit(0)
+            sys.exit(0)
         elif args.kwargs:
             steps[args.executestep](**kwargs)
-            exit(0)
+            sys.exit(0)
         else:
             steps[args.executestep]()
-            exit(0)
+            sys.exit(0)
 
     if not args.noscrape:
         crawler.main(args.inputfile if args.inputfile else "./data/input_data/input.csv")

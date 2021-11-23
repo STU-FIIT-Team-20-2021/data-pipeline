@@ -1,8 +1,8 @@
+"""Manages the merging function of the data pipeline."""
 import pandas as pd
-import argparse
 
 
-def merge():
+def merge() -> None:
     """
     Combines the output from PubChem and SwissADME outputs from the crawler, from their default locations.
 
