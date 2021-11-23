@@ -9,8 +9,33 @@ from math import log
 import os
 
 
-def populate():
-    df = pd.read_csv('../data/merger_output/merged.csv')
+def populate(file=None):
+    """
+    Takes smiles from the output .csv of merger, and populates the csv with chemical descriptors based on them.
+
+    The default input path is: "data/merger_output/merged.csv"
+    the default output path is: "data/chem_output/chem_populated.csv
+
+    The calculated descriptors currently are:
+    cycles
+    atom_valence
+    gesteiger sum and mean of positives, negatives, then total mean and total sum
+    hydrogen_count
+    csp3
+    atomatic_heavy_atoms
+    balban_j
+    hallkier
+    labute_asa
+    h_donors and h_acceptors
+    carbon_count
+    tpsa
+    druglikeness
+    vsa_logP
+    cycle_type_counts
+
+    :param file: Input file for the function for testing, otherwise leave empty for pipeline automation
+    """
+    df = pd.read_csv(file if file else 'data/merger_output/merged.csv')
 
     smiles = df['Smiles'].values.copy()
 
@@ -18,7 +43,7 @@ def populate():
         smiles[idx] = Chem.AddHs(Chem.MolFromSmiles(smile))
 
     [AllChem.ComputeGasteigerCharges(y) for y in smiles]
-    
+
     cycles = [len(x.GetRingInfo().BondRings()) for x in smiles]
     count_valence = [sum([x.GetExplicitValence() for x in y.GetAtoms()]) for y in smiles]
     gesteiger_charges = [[float(x.GetProp("_GasteigerCharge")) for x in y.GetAtoms()] for y in smiles]
@@ -26,8 +51,8 @@ def populate():
     negative_gesteiger_sum = [np.sum([y for y in x if y < 0]) for x in gesteiger_charges]
     positive_gesteiger_mean = [np.mean([y for y in x if y >= 0]) for x in gesteiger_charges]
     negative_gesteiger_mean = [np.mean([y for y in x if y < 0]) for x in gesteiger_charges]
-    total_gesteiger_sum = [np.sum([y for y in x]) * 10 ** 16 for x in gesteiger_charges]
-    total_gesteiger_mean = [np.mean([y for y in x]) * 10 ** 16 for x in gesteiger_charges]
+    total_gesteiger_sum = [np.sum([y for y in x]) * 10 ** 15 for x in gesteiger_charges]
+    total_gesteiger_mean = [np.mean([y for y in x]) * 10 ** 15 for x in gesteiger_charges]
     hydrogen_count = [sum([x.GetAtomicNum() for x in y.GetAtoms() if x.GetAtomicNum() == 1]) for y in smiles]
     carbon_count = [sum([x.GetAtomicNum() for x in y.GetAtoms() if x.GetAtomicNum() == 6]) for y in smiles]
     csp3 = [Mol.CalcFractionCSP3(y) for y in smiles]
@@ -53,7 +78,7 @@ def populate():
     df['positive_gesteiger_sum'] = positive_gesteiger_sum
     df['negative_gesteiger_mean'] = negative_gesteiger_mean
     df['positive_gesteiger_mean'] = positive_gesteiger_mean
-    df['sum_gesteiger_fromsum'] = (df['negative_gesteiger_sum'] + df['positive_gesteiger_sum']) * 10 ** 16
+    df['sum_gesteiger_fromsum'] = (df['negative_gesteiger_sum'] + df['positive_gesteiger_sum']) * 10 ** 15
     df['sum_gesteiger_frommean'] = (df['negative_gesteiger_mean'] + df['positive_gesteiger_mean'])
     df['sum_gesteiger_totalsum'] = total_gesteiger_sum
     df['sum_gesteiger_totalmean'] = total_gesteiger_mean
@@ -72,7 +97,7 @@ def populate():
     df['druglikeliness'] = drug
 
     for i, vsa_vals in enumerate(vsa.transpose()):
-        df[f'vsa_logP_{i}'] = vsa_vals[i]
+        df[f'vsa_logP_{i}'] = vsa_vals
 
     rings = [x.GetRingInfo().BondRings() for x in smiles]
     binarystr = ['0000000000000000'] * len(rings)
@@ -96,6 +121,7 @@ def populate():
     else:
         df.to_csv('data/chem_output/chem_populated.csv', index=False)
 
+    return df
 
 if __name__ == "__main__":
-    populate()
+    populate("data/merger_output/merged.csv")

@@ -3,7 +3,15 @@ import scripts.crawlers.crawler_orchestrator as crawler
 import argparse
 import shutil
 
-if __name__ == "__main__":
+
+def run_pipe():
+    """
+    Runs the pipeline in sequence of steps: Crawler, merger, chem populator, cleaner.
+
+    The chem populator also merges existing data with new data before it's sent to the cleaner.
+
+    Multiple arguments are supported, as described in README.
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument('-inputfile', type=str, help="Input file location.")
     parser.add_argument('-outputfile', type=str, help="Output file destination.")
@@ -18,3 +26,7 @@ if __name__ == "__main__":
 
     if args.outputfile:
         shutil.copy("./data/final/phototox.csv", args.outputfile)
+
+
+if __name__ == "__main__":
+    run_pipe()

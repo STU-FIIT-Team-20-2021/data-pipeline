@@ -3,8 +3,19 @@ import argparse
 
 
 def merge():
-    file_pubchem = '../data/crawler_output/pubchem.csv'
-    file_swiss = '../data/crawler_output/swiss.csv'
+    """
+    Combines the output from PubChem and SwissADME outputs from the crawler, from their default locations.
+
+    Default input files:
+    file_pubchem = 'data/crawler_output/pubchem.csv'
+    file_swiss = 'data/crawler_output/swiss.csv'
+
+    Default output:
+    out = 'data/merger_output/merged.csv'
+    """
+
+    file_pubchem = 'data/crawler_output/pubchem.csv'
+    file_swiss = 'data/crawler_output/swiss.csv'
     out = 'data/merger_output/merged.csv'
 
     df_swiss = pd.read_csv(file_swiss)
